@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+  <persistence-unit name="SystecPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <class>model.Alunos</class>
+    <class>model.Cursos</class>
+    <class>model.Disciplinas</class>
+    <class>model.Matriculas</class>
+    <class>model.MovimentosAcademicos</class>
+    <class>model.Turmas</class>
+    <class>model.Usuario</class>
+    <class>model.view.ViewAlunos</class>
+    <class>model.view.ViewCursos</class>
+    <class>model.view.ViewDisciplina</class>
+    <class>model.view.ViewMatriculas</class>
+    <class>model.view.ViewMovimentoAcademicos</class>
+    <class>model.view.ViewTurmas</class>
+    <class>model.view.ViewUsuario</class>
+    <class>models.Matriculas</class>
+    <class>models.Disciplinas</class>
+    <class>models.Cursos</class>
+    <class>models.Turmas</class>
+    <class>models.Alunos</class>
+    <class>models.Usuario</class>
+    <class>models.MovimentosAcademicos</class>
+    <properties>
+      <property name="hibernate.connection.username" value="root"/>
+      <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+      <property name="hibernate.connection.password" value="simples"/>
+      <property name="hibernate.connection.url" value="jdbc:mysql://localhost:8082/systec"/>
+      <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
+    </properties>
+  </persistence-unit>
+</persistence>

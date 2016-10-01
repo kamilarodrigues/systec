@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioTurma" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4a83aba0-0328-4b14-9423-354664d8a711">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<group name="Group1">
+		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/15)]]></groupExpression>
+	</group>
+	<group name="Group2">
+		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/5)]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="58" splitType="Stretch">
+			<staticText>
+				<reportElement style="SubTitle" x="1" y="27" width="554" height="22" forecolor="#333333" uuid="aaf88943-b13b-4097-b84c-a35fa6a5a00f"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Turma N1 2016/1 - Técnico em Informatica]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="187" height="27" uuid="7650172a-050b-43a8-909c-37fd796ac376"/>
+				<imageExpression><![CDATA["C:\\Users\\Kamila\\Documents\\PI\\imagens\\senai.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="1" y="0" width="554" height="15" forecolor="#CCCCCC" backcolor="#F2F2F2" uuid="8a06e5b3-42f0-4cc8-b78c-a7604c9ed1b3"/>
+			</frame>
+			<staticText>
+				<reportElement style="Column header" x="86" y="1" width="157" height="15" forecolor="#017338" uuid="98c3dbc2-b357-46ef-9638-f91b58053b19"/>
+				<text><![CDATA[Aluno]]></text>
+			</staticText>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="14" width="555" height="1" forecolor="#017338" uuid="0fe4059a-eac6-4d4b-8b24-8eba8755a3f1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="1" y="0" width="84" height="15" forecolor="#017338" uuid="53cb9104-58af-413e-b58f-3454508ebbec"/>
+				<text><![CDATA[Matricula]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="243" y="1" width="69" height="15" forecolor="#017338" uuid="f3efc911-ba79-460c-ad7a-f583b1db7c2c"/>
+				<text><![CDATA[Situação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="312" y="1" width="243" height="15" forecolor="#017338" uuid="c7a501fd-9d67-4131-966b-c0b31f87256a"/>
+				<text><![CDATA[Disciplina]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="35" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="15" uuid="e90a7503-d1d9-4736-87d0-63d32a156cbe"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="85" y="0" width="158" height="15" uuid="b8fa172a-969d-481d-9f05-521a0ce004ae"/>
+					<textFieldExpression><![CDATA["Gabriella Silveira"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="1" y="0" width="85" height="15" uuid="a9312a4f-2e85-4705-a0b4-5578608df1c1"/>
+					<textFieldExpression><![CDATA["02256586"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="243" y="0" width="69" height="15" uuid="27512622-bc93-4284-8271-35f2238b59fc"/>
+					<textFieldExpression><![CDATA["Aprovado"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="313" y="0" width="242" height="15" uuid="fc273982-1414-4f1d-a566-229f255aba09"/>
+					<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="85" y="18" width="158" height="15" uuid="8313f505-fbbe-4c75-9621-5e73c29f2825"/>
+				<textFieldExpression><![CDATA["Luiz Fernando Vargas"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="243" y="18" width="69" height="15" uuid="31a497fe-c673-48d7-a8f5-1745656d002d"/>
+				<textFieldExpression><![CDATA["Reprovado"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="313" y="18" width="242" height="15" uuid="c0667246-c974-4f43-a63c-7aed10afa4a1"/>
+				<textFieldExpression><![CDATA["Programação Orientada a Objeto"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="1" y="18" width="85" height="15" uuid="54303a09-8a3a-4295-9cf6-963f2f9c8163"/>
+				<textFieldExpression><![CDATA["02325415"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="1" y="16" width="555" height="1" backcolor="#FFFFF2" uuid="61b67ebf-fd75-4d90-a16c-87396b88c6f5"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="1" y="34" width="555" height="1" backcolor="#FFFFF2" uuid="910a86a5-32f5-4b2c-964d-455f4c08dc0c"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="14" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="2160c9cb-797f-4897-a782-46bfdbe41703"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="1" width="555" height="24" forecolor="#CCCCCC" backcolor="#F2F2F2" uuid="31e82e76-883c-48c6-af12-7a93094a40e5"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="512" y="0" width="40" height="20" forecolor="#017338" uuid="9239881e-9b6c-48f5-9218-abfa31085321"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="432" y="0" width="80" height="20" forecolor="#017338" uuid="0064c175-c32b-4a74-842e-9eb761dfdfdf"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="1" y="0" width="197" height="20" forecolor="#017338" uuid="f73bc438-43f2-4ced-a75e-fca87ba3b919"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
