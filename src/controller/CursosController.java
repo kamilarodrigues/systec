@@ -32,7 +32,7 @@ public class CursosController {
         }
     }
     
-    public List<ViewCursos> listar(String sql) {
+    public List<Cursos> listar(String sql) {
         cursosFacade = new CursosFacade();
         try {
             return cursosFacade.listar(sql);

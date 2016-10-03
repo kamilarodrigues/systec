@@ -53,7 +53,7 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jTextField1" min="-2" pref="300" max="-2" attributes="0"/>
+                              <Component id="txtNome" min="-2" pref="300" max="-2" attributes="0"/>
                               <Component id="lblNomeCurso" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -74,7 +74,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="lblNomeCurso" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtNome" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="btnPesquisar4" pref="66" max="32767" attributes="0"/>
@@ -92,7 +92,7 @@
             <Property name="alignmentY" type="float" value="0.1"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField1">
+        <Component class="javax.swing.JTextField" name="txtNome">
           <Properties>
             <Property name="alignmentX" type="float" value="0.1"/>
             <Property name="alignmentY" type="float" value="0.1"/>
@@ -114,6 +114,9 @@
             </Property>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConfirmarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnPesquisar4">
           <Properties>

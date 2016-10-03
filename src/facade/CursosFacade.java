@@ -23,7 +23,7 @@ public class CursosFacade {
         return cursosDao.salvar(cursos);
     }
     
-    public List<ViewCursos> listar(String sql) throws SQLException{
+    public List<Cursos> listar(String sql) throws SQLException{
         cursosDao = new CursosDao();
         return cursosDao.listar(sql);
     }
