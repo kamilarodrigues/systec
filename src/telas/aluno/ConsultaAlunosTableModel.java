@@ -3,12 +3,10 @@
  * and open the template in the editor.
  */
 package telas.aluno;
-
-import java.util.Date;
+ 
 import java.util.List;
-import javax.swing.table.AbstractTableModel;
-import model.view.ViewAlunos;
-import model.view.ViewMatriculas;
+import javax.swing.table.AbstractTableModel; 
+import model.Matriculas;
 
 /**
  *
@@ -16,10 +14,10 @@ import model.view.ViewMatriculas;
  */
 public class ConsultaAlunosTableModel extends AbstractTableModel{
     
-    private List<ViewMatriculas> listaAlunos;
-    private String[] colunas ={"Id", "Nome"};
+    private List<Matriculas> listaAlunos;
+    private String[] colunas ={"Matricula", "Nome", "Turma"};
 
-    public ConsultaAlunosTableModel(List<ViewMatriculas> listaAlunos) {
+    public ConsultaAlunosTableModel(List<Matriculas> listaAlunos) {
         this.listaAlunos = listaAlunos;
     }
 
@@ -35,10 +33,10 @@ public class ConsultaAlunosTableModel extends AbstractTableModel{
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         if (columnIndex==0){
-            return listaAlunos.get(rowIndex).getId();
+            return listaAlunos.get(rowIndex).getMatricula();
         }if (columnIndex==1){
-            return listaAlunos.get(rowIndex).getAlunos_id();
-        }else return listaAlunos.get(rowIndex).getMatricula();
+            return listaAlunos.get(rowIndex).getAlunosId();
+        }else return listaAlunos.get(rowIndex).getTurmasId();
     }
     
     @Override
@@ -49,11 +47,9 @@ public class ConsultaAlunosTableModel extends AbstractTableModel{
     @Override
     public Class<?> getColumnClass(int columnIndex) {
         if (columnIndex==0){
-            return Integer.class;
+            return String.class;
         }else if (columnIndex==1){
-             return Integer.class;
-         }else if (columnIndex==2){
-             return  String.class;
+             return String.class; 
          }else return String.class;
     } 
 }

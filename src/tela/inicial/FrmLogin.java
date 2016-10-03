@@ -28,8 +28,7 @@ public class FrmLogin extends javax.swing.JDialog {
     public FrmLogin(java.awt.Frame parent, boolean modal, UsuarioLogadoBean usuarioLogadoBean, JLabel nomeUsuariojLabel) {
         super(parent, modal);
         contador=0;
-        this.telaPrincipal = parent;
-        this.unidadejLabel = unidadejLabel;
+        this.telaPrincipal = parent; 
         this.usuarioLogadoBean = usuarioLogadoBean;
         this.nomeUsuariojLabel = nomeUsuariojLabel;
         initComponents();
@@ -40,7 +39,8 @@ public class FrmLogin extends javax.swing.JDialog {
         }catch (Exception e){
         }
         this.setLocationRelativeTo(null);
-        this.setVisible(true);
+        getRootPane().setDefaultButton(btnLogar);
+        this.setVisible(true); 
     }
     
     
@@ -59,8 +59,8 @@ public class FrmLogin extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         senhajPasswordField = new javax.swing.JPasswordField();
-        loginjButton = new javax.swing.JButton();
-        sairjButton = new javax.swing.JButton();
+        btnLogar = new javax.swing.JButton();
+        btnSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("SysTEC - Login");
@@ -69,22 +69,22 @@ public class FrmLogin extends javax.swing.JDialog {
 
         jLabel1.setText("Senha de Acesso");
 
-        loginjButton.setBackground(new java.awt.Color(204, 204, 204));
-        loginjButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/confirmar.png"))); // NOI18N
-        loginjButton.setText("Confirmar");
-        loginjButton.setToolTipText("Confirma entrada no sistema");
-        loginjButton.addActionListener(new java.awt.event.ActionListener() {
+        btnLogar.setBackground(new java.awt.Color(204, 204, 204));
+        btnLogar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/confirmar.png"))); // NOI18N
+        btnLogar.setText("Confirmar");
+        btnLogar.setToolTipText("Confirma entrada no sistema");
+        btnLogar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginjButtonActionPerformed(evt);
+                btnLogarActionPerformed(evt);
             }
         });
 
-        sairjButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
-        sairjButton.setText("Fechar");
-        sairjButton.setToolTipText("Sair do Sistema");
-        sairjButton.addActionListener(new java.awt.event.ActionListener() {
+        btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
+        btnSair.setText("Fechar");
+        btnSair.setToolTipText("Sair do Sistema");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sairjButtonActionPerformed(evt);
+                btnSairActionPerformed(evt);
             }
         });
 
@@ -96,9 +96,9 @@ public class FrmLogin extends javax.swing.JDialog {
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(loginjButton)
+                        .addComponent(btnLogar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sairjButton))
+                        .addComponent(btnSair))
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(senhajPasswordField)
@@ -118,8 +118,8 @@ public class FrmLogin extends javax.swing.JDialog {
                 .addComponent(senhajPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(sairjButton)
-                    .addComponent(loginjButton))
+                    .addComponent(btnSair)
+                    .addComponent(btnLogar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -139,11 +139,11 @@ public class FrmLogin extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void sairjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairjButtonActionPerformed
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_sairjButtonActionPerformed
+    }//GEN-LAST:event_btnSairActionPerformed
 
-    private void loginjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginjButtonActionPerformed
+    private void btnLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogarActionPerformed
         UsuarioController usuarioController = new UsuarioController();
         Usuario usuario;
         String senha = Formatacao.SenhaString(senhajPasswordField.getPassword());
@@ -166,7 +166,7 @@ public class FrmLogin extends javax.swing.JDialog {
         }else {
             JOptionPane.showMessageDialog(rootPane, "Campo senha em branco");
         }
-    }//GEN-LAST:event_loginjButtonActionPerformed
+    }//GEN-LAST:event_btnLogarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,12 +174,12 @@ public class FrmLogin extends javax.swing.JDialog {
    
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLogar;
+    private javax.swing.JButton btnSair;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JButton loginjButton;
     private javax.swing.JTextField loginjTextField;
-    private javax.swing.JButton sairjButton;
     private javax.swing.JPasswordField senhajPasswordField;
     // End of variables declaration//GEN-END:variables
 

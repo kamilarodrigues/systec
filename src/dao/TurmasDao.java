@@ -30,11 +30,11 @@ public class TurmasDao {
         return turmas;
     }
 
-    public List<ViewTurmas> listar(String sql) throws SQLException {
+    public List<Turmas> listar(String sql) throws SQLException {
         manager = ConexaoSingleton.getConexao();
         manager.getTransaction().begin();
         Query q = manager.createQuery(sql);
-        List<ViewTurmas> listaTurmas = q.getResultList();
+        List<Turmas> listaTurmas = q.getResultList();
         manager.getTransaction().commit();
         return listaTurmas;
     }

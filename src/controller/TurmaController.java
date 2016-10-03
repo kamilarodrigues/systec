@@ -32,7 +32,7 @@ public class TurmaController {
         }
     }
     
-    public List<ViewTurmas> listar(String sql) {
+    public List<Turmas> listar(String sql) {
         turmasFacade = new TurmasFacade();
         try {
             return turmasFacade.listar(sql);

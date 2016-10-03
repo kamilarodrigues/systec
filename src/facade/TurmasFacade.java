@@ -23,7 +23,7 @@ public class TurmasFacade {
         return turmasDao.salvar(turmas);
     }
     
-    public List<ViewTurmas> listar(String sql) throws SQLException{
+    public List<Turmas> listar(String sql) throws SQLException{
         turmasDao = new TurmasDao();
         return turmasDao.listar(sql);
     }

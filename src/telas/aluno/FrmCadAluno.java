@@ -5,12 +5,17 @@
  */
 package telas.aluno;
  
-import controller.AlunosController;
+import controller.AlunosController; 
+import controller.CursosController;
 import controller.MatriculaController;
+import controller.TurmaController;
+import java.util.List;
 import javax.swing.JOptionPane;
-import model.Alunos;
+import model.Alunos; 
+import model.Cursos;
 import model.Matriculas;
-
+import model.Turmas;
+import util.Formatacao;
 
 /**
  *
@@ -18,20 +23,26 @@ import model.Matriculas;
  */
 public class FrmCadAluno extends javax.swing.JFrame {
 
-    public Matriculas matriculas; 
+    public Matriculas matriculas;
     private IAlunos telaAluno;
     private Alunos alunos;
-    
-    public FrmCadAluno(Matriculas matriculas) {
+
+    public FrmCadAluno(Matriculas matriculas, IAlunos telaAluno) {
         this.matriculas = matriculas;
-        if(matriculas.getId()==null){
-            alunos = new Alunos();
-        }else{
-            alunos = matriculas.getAlunosId();
-        }
+        this.telaAluno = telaAluno;
         initComponents();
+        carregarComboCurso();
+        if (matriculas.getId() == null) {
+            alunos = new Alunos();
+        } else {
+            alunos = matriculas.getAlunosId();
+            txtMatricula.setText(matriculas.getMatricula());
+            txtNomeAluno.setText(alunos.getNome());
+            cbxCurso.setSelectedItem(matriculas.getTurmasId().getCursosId());
+            cbxTurma.setSelectedItem(matriculas.getTurmasId());
+        } 
         this.setLocationRelativeTo(null);
-        this.setVisible(true);
+        this.setVisible(true); 
     }
 
     /**
@@ -44,25 +55,40 @@ public class FrmCadAluno extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        lblNomeCurso = new javax.swing.JLabel();
-        txtNomeAluno = new javax.swing.JTextField();
-        btnConfirmar = new javax.swing.JButton();
-        btnPesquisar4 = new javax.swing.JButton();
-        lblNomeCurso1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<String>();
+        lblMatricula = new javax.swing.JLabel();
         txtMatricula = new javax.swing.JTextField();
+        lblNomeAluno = new javax.swing.JLabel();
+        txtNomeAluno = new javax.swing.JTextField();
+        lblNomeCurso = new javax.swing.JLabel();
+        cbxTurma = new javax.swing.JComboBox();
+        btnConfirmar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        cbxCurso = new javax.swing.JComboBox<String>();
         lblNomeCurso2 = new javax.swing.JLabel();
 
         setTitle("Cadastro de Alunos");
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblMatricula.setText("Matricula:");
+        lblMatricula.setAlignmentY(0.1F);
 
-        lblNomeCurso.setText("Nome do Aluno:");
-        lblNomeCurso.setAlignmentY(0.1F);
+        txtMatricula.setAlignmentX(0.1F);
+        txtMatricula.setAlignmentY(0.1F);
+
+        lblNomeAluno.setText("Nome do Aluno:");
+        lblNomeAluno.setAlignmentY(0.1F);
 
         txtNomeAluno.setAlignmentX(0.1F);
         txtNomeAluno.setAlignmentY(0.1F);
+
+        lblNomeCurso.setText("Turma:");
+        lblNomeCurso.setAlignmentY(0.1F);
+
+        cbxTurma.setToolTipText("");
+        cbxTurma.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxTurmaItemStateChanged(evt);
+            }
+        });
 
         btnConfirmar.setBackground(new java.awt.Color(255, 255, 255));
         btnConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/confirmar.png"))); // NOI18N
@@ -78,29 +104,33 @@ public class FrmCadAluno extends javax.swing.JFrame {
             }
         });
 
-        btnPesquisar4.setBackground(new java.awt.Color(255, 255, 255));
-        btnPesquisar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
-        btnPesquisar4.setText("Cancelar");
-        btnPesquisar4.setBorder(null);
-        btnPesquisar4.setBorderPainted(false);
-        btnPesquisar4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnPesquisar4.setPreferredSize(new java.awt.Dimension(80, 90));
-        btnPesquisar4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnPesquisar4.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar.setBackground(new java.awt.Color(255, 255, 255));
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
+        btnCancelar.setText("Cancelar");
+        btnCancelar.setBorder(null);
+        btnCancelar.setBorderPainted(false);
+        btnCancelar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCancelar.setPreferredSize(new java.awt.Dimension(80, 90));
+        btnCancelar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPesquisar4ActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
 
-        lblNomeCurso1.setText("Curso:");
-        lblNomeCurso1.setAlignmentY(0.1F);
+        cbxCurso.setBackground(new java.awt.Color(204, 255, 204));
+        cbxCurso.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxCursoItemStateChanged(evt);
+            }
+        });
+        cbxCurso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxCursoActionPerformed(evt);
+            }
+        });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione", "Item 2", "Item 3", "Item 4" }));
-
-        txtMatricula.setAlignmentX(0.1F);
-        txtMatricula.setAlignmentY(0.1F);
-
-        lblNomeCurso2.setText("Matricula:");
+        lblNomeCurso2.setText("Curso:");
         lblNomeCurso2.setAlignmentY(0.1F);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -108,53 +138,49 @@ public class FrmCadAluno extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(27, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(lblNomeCurso))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(87, 87, 87)
-                            .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnPesquisar4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(lblNomeCurso1)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblNomeCurso2)
+                            .addComponent(lblMatricula)
                             .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblNomeCurso2))))
-                .addContainerGap(103, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(txtNomeAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                            .addComponent(lblNomeAluno)
+                            .addComponent(txtNomeAluno)
+                            .addComponent(lblNomeCurso)
+                            .addComponent(cbxTurma, 0, 300, Short.MAX_VALUE)
+                            .addComponent(cbxCurso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(20, 20, 20))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(104, 104, 104))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblNomeCurso2)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(lblMatricula)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                .addComponent(lblNomeCurso)
-                .addGap(1, 1, 1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblNomeAluno)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNomeAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblNomeCurso2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbxCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblNomeCurso)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbxTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblNomeCurso1)
-                .addGap(1, 1, 1)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnPesquisar4, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
-                    .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnConfirmar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -171,45 +197,94 @@ public class FrmCadAluno extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnPesquisar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisar4ActionPerformed
-         System.exit(0);
-    }//GEN-LAST:event_btnPesquisar4ActionPerformed
-
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         String validar = validarDados();
-        if (validar.length()<5){
+        if (validar.length() < 5) {
             preencherModelAluno();
-        }else {
+        } else {
             JOptionPane.showMessageDialog(rootPane, validar);
         }
     }//GEN-LAST:event_btnConfirmarActionPerformed
- 
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void cbxTurmaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxTurmaItemStateChanged
+        Object obj = cbxTurma.getSelectedItem();
+        Turmas turmas = null;
+        if (obj instanceof Turmas) {
+            turmas = (Turmas) obj;
+        }
+    }//GEN-LAST:event_cbxTurmaItemStateChanged
+
+    private void cbxCursoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCursoItemStateChanged
+        Object obj = cbxCurso.getSelectedItem();
+        Cursos cursos = null;
+        if (obj instanceof Cursos) {
+            cursos = (Cursos) obj;
+        }
+        if (cursos!=null){
+            carregarComboTurma(cursos); 
+        }
+    }//GEN-LAST:event_cbxCursoItemStateChanged
+
+    private void cbxCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCursoActionPerformed
+
+    }//GEN-LAST:event_cbxCursoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnConfirmar;
-    private javax.swing.JButton btnPesquisar4;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cbxCurso;
+    private javax.swing.JComboBox cbxTurma;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblMatricula;
+    private javax.swing.JLabel lblNomeAluno;
     private javax.swing.JLabel lblNomeCurso;
-    private javax.swing.JLabel lblNomeCurso1;
     private javax.swing.JLabel lblNomeCurso2;
     private javax.swing.JTextField txtMatricula;
     private javax.swing.JTextField txtNomeAluno;
     // End of variables declaration//GEN-END:variables
-    
-    public String validarDados(){
-        String dados="";
+
+    public String validarDados() {
+        String dados = "";
         return dados;
     }
 
-    public void preencherModelAluno(){  
-        alunos.setNome(txtNomeAluno.getText()); 
+    public void preencherModelAluno() {
+        alunos.setNome(txtNomeAluno.getText());
         AlunosController alunosController = new AlunosController();
         alunos = alunosController.salvar(alunos);
         matriculas.setMatricula(txtMatricula.getText());
         matriculas.setAlunosId(alunos);
+        Turmas turmas = (Turmas) cbxTurma.getSelectedItem();
+        matriculas.setTurmasId(turmas);
         MatriculaController matriculaController = new MatriculaController();
         matriculas = matriculaController.salvar(matriculas);
         telaAluno.setModel();
         this.dispose();
     }
+
+    public void carregarComboTurma(Cursos cursos) {
+        if(cursos!=null){
+            cbxTurma.removeAllItems();
+            TurmaController turmasController = new TurmaController();
+            String sql = "select t from Turmas t where t.cursosId.id="+cursos.getId()+" order by t.codigo";
+            List<Turmas> listaTurmas = turmasController.listar(sql);
+            if (listaTurmas != null) {
+                cbxTurma = Formatacao.preencherComobox(listaTurmas, cbxTurma, true, "Selecione");
+            }
+        }
+    }
+    
+    public void carregarComboCurso() {
+        CursosController cursosController = new CursosController();
+        String sql = "select c from Cursos c order by c.nome";
+        List<Cursos> listaCursos = cursosController.listar(sql);
+        if (listaCursos != null) {
+            cbxCurso = Formatacao.preencherComobox(listaCursos, cbxCurso, true, "Selecione");
+        }
+    }
+
 }

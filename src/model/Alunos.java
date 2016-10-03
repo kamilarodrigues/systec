@@ -92,7 +92,7 @@ public class Alunos implements Serializable {
 
     @Override
     public String toString() {
-        return "models.Alunos[ id=" + id + " ]";
+        return nome;
     }
     
 }

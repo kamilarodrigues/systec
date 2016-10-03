@@ -23,7 +23,7 @@ public class MatriculasFacade {
         return matriculasDao.salvar(matriculas);
     }
     
-    public List<ViewMatriculas> listar(String sql) throws SQLException{
+    public List<Matriculas> listar(String sql) throws SQLException{
         matriculasDao = new MatriculasDao();
         return matriculasDao.listar(sql);
     }

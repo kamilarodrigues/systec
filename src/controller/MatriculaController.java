@@ -32,7 +32,7 @@ public class MatriculaController {
         }
     }
     
-    public List<ViewMatriculas> listar(String sql) {
+    public List<Matriculas> listar(String sql) {
         matriculasFacade = new MatriculasFacade();
         try {
             return matriculasFacade.listar(sql);

@@ -32,7 +32,7 @@ public class DisciplinaController {
         }
     }
     
-    public List<ViewDisciplina> listar(String sql) {
+    public List<Disciplinas> listar(String sql) {
         disciplinaFacade = new DisciplinaFacade();
         try {
             return disciplinaFacade.listar(sql);

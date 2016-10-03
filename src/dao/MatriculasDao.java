@@ -30,11 +30,11 @@ public class MatriculasDao {
         return matriculas;
     }
 
-    public List<ViewMatriculas> listar(String sql) throws SQLException {
+    public List<Matriculas> listar(String sql) throws SQLException {
         manager = ConexaoSingleton.getConexao();
         manager.getTransaction().begin();
         Query q = manager.createQuery(sql);
-        List<ViewMatriculas> listaMatriculas = q.getResultList();
+        List<Matriculas> listaMatriculas = q.getResultList();
         manager.getTransaction().commit();
         return listaMatriculas;
     }
