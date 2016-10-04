@@ -207,7 +207,7 @@ public class FrmCadAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        System.exit(0);
+        this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void cbxTurmaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxTurmaItemStateChanged

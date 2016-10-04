@@ -129,7 +129,7 @@ public class FrmCadTurma extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPesquisar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisar4ActionPerformed
-       System.exit(0);
+       this.dispose();
     }//GEN-LAST:event_btnPesquisar4ActionPerformed
 
     /**

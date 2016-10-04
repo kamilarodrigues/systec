@@ -141,7 +141,7 @@ public class FrmSituacaoMovimentoAcademico extends javax.swing.JFrame {
     }//GEN-LAST:event_canceladojRadioButtonActionPerformed
 
     private void btnPesquisar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisar4ActionPerformed
-         System.exit(0);
+         this.dispose();
     }//GEN-LAST:event_btnPesquisar4ActionPerformed
 
     /**
