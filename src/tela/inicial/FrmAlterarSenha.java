@@ -130,21 +130,30 @@ public class FrmAlterarSenha extends javax.swing.JDialog {
     }//GEN-LAST:event_sairjButtonActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        if (Arrays.equals(novaSenhajPasswordField.getPassword(), confirmaNovaSenhajPasswordField.getPassword())) {
-            String senha = Formatacao.SenhaString((confirmaNovaSenhajPasswordField.getPassword()));
-            try {
-                usuario.setSenha(Criptografia.encript(senha));
-            } catch (NoSuchAlgorithmException ex) {
-                Logger.getLogger(FrmAlterarSenha.class.getName()).log(Level.SEVERE, null, ex);
+        if(novaSenhajPasswordField.getText()!=null && novaSenhajPasswordField.getText().length()>0){
+            if(confirmaNovaSenhajPasswordField.getText()!=null && confirmaNovaSenhajPasswordField.getText().length()>0){
+                if (Arrays.equals(novaSenhajPasswordField.getPassword(), confirmaNovaSenhajPasswordField.getPassword())) {
+                    String senha = Formatacao.SenhaString((confirmaNovaSenhajPasswordField.getPassword()));
+                    try {
+                        usuario.setSenha(Criptografia.encript(senha));
+                    } catch (NoSuchAlgorithmException ex) {
+                        Logger.getLogger(FrmAlterarSenha.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    UsuarioController usuarioController = new UsuarioController();
+                    usuarioController.salvar(usuario);
+                    JOptionPane.showMessageDialog(rootPane, "Senha alterada com sucesso");
+                    this.dispose();
+                }else {
+                    JOptionPane.showMessageDialog(rootPane, "Senhas não conferem");
+                    novaSenhajPasswordField.requestFocus();
+                    novaSenhajPasswordField.selectAll();
+                }
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "Campo confirmar nova senha em branco");
             }
-            UsuarioController usuarioController = new UsuarioController();
-            usuarioController.salvar(usuario);
-            JOptionPane.showMessageDialog(rootPane, "Senha alterada com sucesso");
-            this.dispose();
-        }else {
-            JOptionPane.showMessageDialog(rootPane, "Senhas não conferem");
-            novaSenhajPasswordField.requestFocus();
-            novaSenhajPasswordField.selectAll();
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Campo nova senha em branco");
+
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
