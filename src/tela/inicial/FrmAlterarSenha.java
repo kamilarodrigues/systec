@@ -134,8 +134,8 @@ public class FrmAlterarSenha extends javax.swing.JDialog {
             if(confirmaNovaSenhajPasswordField.getText()!=null && confirmaNovaSenhajPasswordField.getText().length()>0){
                 if (Arrays.equals(novaSenhajPasswordField.getPassword(), confirmaNovaSenhajPasswordField.getPassword())) {
                     String senha = Formatacao.SenhaString((confirmaNovaSenhajPasswordField.getPassword()));
-                    try {
-                        usuario.setSenha(Criptografia.encript(senha));
+                     try {
+                        usuario.setSenha(Criptografia.encript(senha));   
                     } catch (NoSuchAlgorithmException ex) {
                         Logger.getLogger(FrmAlterarSenha.class.getName()).log(Level.SEVERE, null, ex);
                     }
