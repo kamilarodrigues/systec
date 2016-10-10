@@ -10,7 +10,7 @@ import model.Matriculas;
 
 /**
  *
- * @author Wolverine
+ * @author Kamila
  */
 public class ConsultaAlunosTableModel extends AbstractTableModel{
     

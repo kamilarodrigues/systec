@@ -249,6 +249,15 @@ public class FrmCadAluno extends javax.swing.JFrame {
 
     public String validarDados() {
         String dados = "";
+        if(txtMatricula.getText().length()==0){
+            dados = dados + " Matrícula não informada.";
+        }
+        if(txtNomeAluno.getText().length()==0){
+            dados = dados + " Nome não informado.";
+        }
+        if(cbxTurma.getSelectedItem()==null){
+            dados = dados + " Turma não informada.";
+        }
         return dados;
     }
 
