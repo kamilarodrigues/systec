@@ -2,14 +2,20 @@ package telas.aluno;
 
 import controller.CursosController;
 import controller.MatriculaController;
-import controller.TurmaController;
 import facade.MatriculasFacade;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import model.Cursos;
 import model.Matriculas;
 import model.Turmas;
@@ -23,22 +29,13 @@ public class FrmConsAluno extends javax.swing.JFrame implements IAlunos {
 
     private List<Matriculas> listaAlunos;
     private ConsultaAlunosTableModel modelAlunos;
-    private javax.swing.JButton btnEditar;
-    private javax.swing.JButton btnExcluir;
-    private javax.swing.JButton btnLimpar;
-    private javax.swing.JButton btnNovo;
-    private javax.swing.JButton btnPesquisar;
-    private javax.swing.JComboBox<String> cbxCurso;
-    private javax.swing.JComboBox<String> cbxTurma;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JLabel lblNomeCurso;
-    private javax.swing.JLabel lblNomeCurso1;
-    private javax.swing.JLabel lblNomeCurso2;
-    private javax.swing.JLabel lblNomeCurso3;
-    private javax.swing.JTable tabelaAlunos;
-    private javax.swing.JTextField txtNomeAluno;
+    private JButton btnEditar, btnExcluir, btnLimpar, btnNovo, btnPesquisar;
+    private JComboBox<String> cbxCurso, cbxTurma;
+    private JPanel jPanel;
+    private JScrollPane tabelaScroll;
+    private JTextField txtNomeAluno;
+    private JLabel lblNomeAluno, lblNomeCurso, lblNomeTurma;
+    private JTable tabelaAlunos;
 
     public FrmConsAluno() {
         inserindoComponentes();
@@ -50,36 +47,27 @@ public class FrmConsAluno extends javax.swing.JFrame implements IAlunos {
 
     @SuppressWarnings("unchecked")
     private void inserindoComponentes() {
-
-        jTextField2 = new javax.swing.JTextField();
-        lblNomeCurso1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        lblNomeCurso = new javax.swing.JLabel();
+        jPanel = new javax.swing.JPanel();
+        lblNomeAluno = new javax.swing.JLabel();
         txtNomeAluno = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        tabelaScroll = new javax.swing.JScrollPane();
         tabelaAlunos = new javax.swing.JTable();
         btnNovo = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
-        lblNomeCurso2 = new javax.swing.JLabel();
-        lblNomeCurso3 = new javax.swing.JLabel();
+        lblNomeCurso = new javax.swing.JLabel();
+        lblNomeTurma = new javax.swing.JLabel();
         btnPesquisar = new javax.swing.JButton();
         cbxTurma = new javax.swing.JComboBox<String>();
         cbxCurso = new javax.swing.JComboBox<String>();
         btnLimpar = new javax.swing.JButton();
 
-        jTextField2.setAlignmentX(0.1F);
-        jTextField2.setAlignmentY(0.1F);
-
-        lblNomeCurso1.setText("Nome da Disciplina:");
-        lblNomeCurso1.setAlignmentY(0.1F);
-
         setTitle("Consulta de Alunos");
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        lblNomeCurso.setText("Nome do Aluno:");
-        lblNomeCurso.setAlignmentY(0.1F);
+        lblNomeAluno.setText("Nome do Aluno:");
+        lblNomeAluno.setAlignmentY(0.1F);
 
         txtNomeAluno.setAlignmentX(0.1F);
         txtNomeAluno.setAlignmentY(0.1F);
@@ -110,7 +98,7 @@ public class FrmConsAluno extends javax.swing.JFrame implements IAlunos {
         tabelaAlunos.setGridColor(new java.awt.Color(0, 102, 51));
         tabelaAlunos.setSelectionBackground(new java.awt.Color(0, 102, 51));
         tabelaAlunos.setSelectionForeground(new java.awt.Color(204, 255, 204));
-        jScrollPane1.setViewportView(tabelaAlunos);
+        tabelaScroll.setViewportView(tabelaAlunos);
 
         btnNovo.setBackground(new java.awt.Color(255, 255, 255));
         btnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/adicionar.png"))); // NOI18N
@@ -154,11 +142,11 @@ public class FrmConsAluno extends javax.swing.JFrame implements IAlunos {
             }
         });
 
-        lblNomeCurso2.setText("Curso:");
-        lblNomeCurso2.setAlignmentY(0.1F);
+        lblNomeCurso.setText("Curso:");
+        lblNomeCurso.setAlignmentY(0.1F);
 
-        lblNomeCurso3.setText("Turma:");
-        lblNomeCurso3.setAlignmentY(0.1F);
+        lblNomeTurma.setText("Turma:");
+        lblNomeTurma.setAlignmentY(0.1F);
 
         btnPesquisar.setBackground(new java.awt.Color(255, 255, 255));
         btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar.png"))); // NOI18N
@@ -185,7 +173,7 @@ public class FrmConsAluno extends javax.swing.JFrame implements IAlunos {
         });
 
         btnLimpar.setBackground(new java.awt.Color(255, 255, 255));
-        btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/limparpesquisa.png"))); // NOI18N
+        btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/limparpesquisa.png")));  
         btnLimpar.setText("Limpar");
         btnLimpar.setBorder(null);
         btnLimpar.addActionListener(new java.awt.event.ActionListener() {
@@ -194,25 +182,25 @@ public class FrmConsAluno extends javax.swing.JFrame implements IAlunos {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
+        jPanel.setLayout(jPanelLayout);
+        jPanelLayout.setHorizontalGroup(
+                jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanelLayout.createSequentialGroup()
+                                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanelLayout.createSequentialGroup()
                                                 .addContainerGap()
-                                                .addComponent(jScrollPane1))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(tabelaScroll))
+                                        .addGroup(jPanelLayout.createSequentialGroup()
                                                 .addGap(29, 29, 29)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(lblNomeCurso)
+                                                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(lblNomeAluno)
                                                         .addComponent(txtNomeAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(cbxCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(lblNomeCurso2))
+                                                        .addComponent(lblNomeCurso))
                                                 .addGap(18, 18, 18)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(lblNomeCurso3)
+                                                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(lblNomeTurma)
                                                         .addComponent(cbxTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                                                 .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -220,7 +208,7 @@ public class FrmConsAluno extends javax.swing.JFrame implements IAlunos {
                                                 .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(42, 42, 42)))
                                 .addContainerGap())
-                        .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanelLayout.createSequentialGroup()
                                 .addGap(264, 264, 264)
                                 .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -229,36 +217,36 @@ public class FrmConsAluno extends javax.swing.JFrame implements IAlunos {
                                 .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
+        jPanelLayout.setVerticalGroup(
+                jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
+                                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanelLayout.createSequentialGroup()
                                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                         .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanelLayout.createSequentialGroup()
                                                 .addGap(17, 17, 17)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                         .addComponent(txtNomeAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                                .addComponent(lblNomeCurso)
+                                                        .addGroup(jPanelLayout.createSequentialGroup()
+                                                                .addComponent(lblNomeAluno)
                                                                 .addGap(26, 26, 26)))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                                                .addComponent(lblNomeCurso3)
+                                                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
+                                                                .addComponent(lblNomeTurma)
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                 .addComponent(cbxTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                                                .addComponent(lblNomeCurso2)
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
+                                                                .addComponent(lblNomeCurso)
                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                 .addComponent(cbxCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                                 .addGap(18, 18, 18)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tabelaScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                         .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -269,11 +257,11 @@ public class FrmConsAluno extends javax.swing.JFrame implements IAlunos {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -386,9 +374,7 @@ public class FrmConsAluno extends javax.swing.JFrame implements IAlunos {
     public void carregarComboTurma(Cursos cursos) {
         if (cursos != null) {
             cbxTurma.removeAllItems();
-            TurmaController turmasController = new TurmaController();
-            String sql = "select t from Turmas t where t.cursosId.id=" + cursos.getId() + " order by t.codigo";
-            List<Turmas> listaTurmas = turmasController.listar(sql);
+            List<Turmas> listaTurmas = cursos.getTurmasList();
             if (listaTurmas != null) {
                 cbxTurma = Formatacao.preencherComobox(listaTurmas, cbxTurma, true, "Selecione");
             }

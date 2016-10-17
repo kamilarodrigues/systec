@@ -3,7 +3,6 @@ package telas.aluno;
 import controller.AlunosController;
 import controller.CursosController;
 import controller.MatriculaController;
-import controller.TurmaController;
 import java.util.List;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
@@ -257,10 +256,8 @@ public class FrmCadAluno extends JFrame {
 
     public void carregarComboTurma(Cursos cursos) {
         if (cursos != null) {
-            cbxTurma.removeAllItems();
-            TurmaController turmasController = new TurmaController();
-            String sql = "select t from Turmas t where t.cursosId.id=" + cursos.getId() + " order by t.codigo";
-            List<Turmas> listaTurmas = turmasController.listar(sql);
+            cbxTurma.removeAllItems(); 
+            List<Turmas> listaTurmas = cursos.getTurmasList();
             if (listaTurmas != null) {
                 cbxTurma = Formatacao.preencherComobox(listaTurmas, cbxTurma, true, "Selecione");
             }
