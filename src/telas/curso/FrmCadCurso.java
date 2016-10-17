@@ -12,11 +12,16 @@ public class FrmCadCurso extends javax.swing.JFrame {
 
     public Cursos cursos;
     public ICurso telaCurso;
+    private javax.swing.JButton btnConfirmar;
+    private javax.swing.JButton btnPesquisar4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblNomeCurso;
+    private javax.swing.JTextField txtNome; 
     
     public FrmCadCurso(Cursos cursos, ICurso telaCurso) {
         this.cursos=cursos;
         this.telaCurso = telaCurso;
-        initComponents();
+        inserindoComponentes();
         txtNome.setText("");
         if(cursos!=null){
             txtNome.setText(cursos.getNome());
@@ -24,14 +29,12 @@ public class FrmCadCurso extends javax.swing.JFrame {
             this.cursos = new Cursos();
         } 
         this.setLocationRelativeTo(null);
-        this.setVisible(true);
-        
+        this.setVisible(true); 
     }
 
      
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    @SuppressWarnings("unchecked") 
+    private void inserindoComponentes() {
 
         jPanel1 = new javax.swing.JPanel();
         lblNomeCurso = new javax.swing.JLabel();
@@ -120,13 +123,13 @@ public class FrmCadCurso extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
-    private void btnPesquisar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisar4ActionPerformed
+    private void btnPesquisar4ActionPerformed(java.awt.event.ActionEvent evt) {
        this.dispose();
-    }//GEN-LAST:event_btnPesquisar4ActionPerformed
+    }
 
-    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {
         if(txtNome.getText().length()>1){
             cursos.setNome(txtNome.getText());
             CursosController cursosController = new CursosController();
@@ -137,13 +140,5 @@ public class FrmCadCurso extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(rootPane, "Informe o nome do curso.");
         }
-    }//GEN-LAST:event_btnConfirmarActionPerformed
- 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnConfirmar;
-    private javax.swing.JButton btnPesquisar4;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lblNomeCurso;
-    private javax.swing.JTextField txtNome;
-    // End of variables declaration//GEN-END:variables
+    } 
 }

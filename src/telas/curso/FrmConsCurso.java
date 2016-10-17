@@ -14,9 +14,18 @@ public class FrmConsCurso extends javax.swing.JFrame implements ICurso{
     
     private List<Cursos> listaCurso;
     private ConsultaCursosTableModel modelCurso;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnNovo;
+    private javax.swing.JButton btnPesquisar;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblNomeCurso;
+    private javax.swing.JTable tabelaCursos;
+    private javax.swing.JTextField txtNome;
      
     public FrmConsCurso() {
-        initComponents();
+        inserindoComponentes();
         this.setLocationRelativeTo(null);
         setModelCurso();
         this.setVisible(true);
@@ -24,10 +33,9 @@ public class FrmConsCurso extends javax.swing.JFrame implements ICurso{
     }
 
      
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
-
+    @SuppressWarnings("unchecked") 
+    private void inserindoComponentes() {
+        //componentes da pagina consulta de curso
         jPanel1 = new javax.swing.JPanel();
         lblNomeCurso = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
@@ -71,12 +79,7 @@ public class FrmConsCurso extends javax.swing.JFrame implements ICurso{
             }
         });
         tabelaCursos.setGridColor(new java.awt.Color(0, 51, 0));
-        tabelaCursos.setSelectionBackground(new java.awt.Color(0, 51, 0));
-        tabelaCursos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabelaCursosMouseClicked(evt);
-            }
-        });
+        tabelaCursos.setSelectionBackground(new java.awt.Color(0, 51, 0)); 
         jScrollPane1.setViewportView(tabelaCursos);
 
         btnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/adicionar.png"))); // NOI18N
@@ -185,28 +188,24 @@ public class FrmConsCurso extends javax.swing.JFrame implements ICurso{
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }  
 
-    private void tabelaCursosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaCursosMouseClicked
-      
-    }//GEN-LAST:event_tabelaCursosMouseClicked
-
-    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {
         setModelCurso();
-    }//GEN-LAST:event_btnPesquisarActionPerformed
+    }
 
-    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {
         new FrmCadCurso(null, this);
-    }//GEN-LAST:event_btnNovoActionPerformed
+    }
 
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {
         int linha = tabelaCursos.getSelectedRow();
         if (linha>=0){
             new FrmCadCurso(listaCurso.get(linha), this);
         }else JOptionPane.showMessageDialog(rootPane, "Selecione um Curso");
-    }//GEN-LAST:event_btnEditarActionPerformed
+    }
 
-    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {
         int linha = tabelaCursos.getSelectedRow();
         if (linha>=0){
             CursosController cursosController = new CursosController(); 
@@ -215,20 +214,9 @@ public class FrmConsCurso extends javax.swing.JFrame implements ICurso{
             setModelCurso();
             JOptionPane.showMessageDialog(rootPane, "Curso excluído com sucesso.");
         }else JOptionPane.showMessageDialog(rootPane, "Selecione um Curso");
-    }//GEN-LAST:event_btnExcluirActionPerformed
+    }
   
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEditar;
-    private javax.swing.JButton btnExcluir;
-    private javax.swing.JButton btnNovo;
-    private javax.swing.JButton btnPesquisar;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblNomeCurso;
-    private javax.swing.JTable tabelaCursos;
-    private javax.swing.JTextField txtNome;
-    // End of variables declaration//GEN-END:variables
+ 
 
     @Override
     public void setModelCurso() {
