@@ -8,6 +8,7 @@ package telas.disciplina;
 import controller.DisciplinaController;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import model.Disciplinas;
 
 
@@ -44,8 +45,8 @@ public class FrmConsDisciplina extends javax.swing.JFrame implements IDisciplina
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaDisciplina = new javax.swing.JTable();
         btnPesquisar = new javax.swing.JButton();
-        btnPesquisar3 = new javax.swing.JButton();
-        btnPesquisar4 = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
         txtNomeCurso = new javax.swing.JTextField();
         lblNomeCurso2 = new javax.swing.JLabel();
         btnPesquisar1 = new javax.swing.JButton();
@@ -111,21 +112,31 @@ public class FrmConsDisciplina extends javax.swing.JFrame implements IDisciplina
             }
         });
 
-        btnPesquisar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/editar.png"))); // NOI18N
-        btnPesquisar3.setText("Editar");
-        btnPesquisar3.setBorder(null);
-        btnPesquisar3.setBorderPainted(false);
-        btnPesquisar3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnPesquisar3.setPreferredSize(new java.awt.Dimension(80, 90));
-        btnPesquisar3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/editar.png"))); // NOI18N
+        btnEditar.setText("Editar");
+        btnEditar.setBorder(null);
+        btnEditar.setBorderPainted(false);
+        btnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnEditar.setPreferredSize(new java.awt.Dimension(80, 90));
+        btnEditar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
-        btnPesquisar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluir.png"))); // NOI18N
-        btnPesquisar4.setText("Excluir");
-        btnPesquisar4.setBorder(null);
-        btnPesquisar4.setBorderPainted(false);
-        btnPesquisar4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnPesquisar4.setPreferredSize(new java.awt.Dimension(80, 90));
-        btnPesquisar4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluir.png"))); // NOI18N
+        btnExcluir.setText("Excluir");
+        btnExcluir.setBorder(null);
+        btnExcluir.setBorderPainted(false);
+        btnExcluir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnExcluir.setPreferredSize(new java.awt.Dimension(80, 90));
+        btnExcluir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         txtNomeCurso.setAlignmentX(0.1F);
         txtNomeCurso.setAlignmentY(0.1F);
@@ -150,9 +161,9 @@ public class FrmConsDisciplina extends javax.swing.JFrame implements IDisciplina
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnPesquisar3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnPesquisar4, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(157, 157, 157))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -192,8 +203,8 @@ public class FrmConsDisciplina extends javax.swing.JFrame implements IDisciplina
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(btnPesquisar4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(btnPesquisar3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -231,14 +242,39 @@ public class FrmConsDisciplina extends javax.swing.JFrame implements IDisciplina
     }//GEN-LAST:event_btnPesquisar1ActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        new FrmCadDisciplina();
+        new FrmCadDisciplina(new Disciplinas(), this);
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+        int linha = tabelaDisciplina.getSelectedRow();
+       if(linha >= 0){
+           new FrmCadDisciplina(listaDisciplina.get(linha), this);
+       }else{
+           JOptionPane.showMessageDialog(rootPane, "Selecione uma Disciplina");
+       }
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // TODO add your handling code here:
+        DisciplinaController disciplinaController = new DisciplinaController();
+        int linha = tabelaDisciplina.getSelectedRow();
+        if(linha >= 0) {
+            disciplinaController.excluir(listaDisciplina.get(linha).getId());
+            setModel();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Selecione uma Disciplina");
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnPesquisar1;
-    private javax.swing.JButton btnPesquisar3;
-    private javax.swing.JButton btnPesquisar4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField2;

@@ -38,11 +38,9 @@ public class Disciplinas implements Serializable {
     private Integer id;
     @Column(name = "nome")
     private String nome;
-    @JoinColumn(name = "cursos_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "cursos_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Cursos cursos;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "disciplinasId")
-    private List<MovimentosAcademicos> movimentosAcademicosList;
 
     public Disciplinas() {
     }
@@ -70,13 +68,6 @@ public class Disciplinas implements Serializable {
         this.cursos = cursos;
     }
 
-    public List<MovimentosAcademicos> getMovimentosAcademicosList() {
-        return movimentosAcademicosList;
-    }
-
-    public void setMovimentosAcademicosList(List<MovimentosAcademicos> movimentosAcademicosList) {
-        this.movimentosAcademicosList = movimentosAcademicosList;
-    }
 
     @Override
     public int hashCode() {
@@ -100,7 +91,7 @@ public class Disciplinas implements Serializable {
 
     @Override
     public String toString() {
-        return "models.Disciplinas[ id=" + id + " ]";
+        return getNome();
     }
     
 }
