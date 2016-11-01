@@ -6,21 +6,36 @@
 
 package telas.movimentoAcademico; 
 
+import controller.MovimentoAcademicoController;
+import facade.MovimentoAcademicoFacade;
+import java.util.List;
+import javax.swing.JOptionPane;
+import model.Matriculas;
+import model.MovimentosAcademicos;
+
 /**
  *
- * @author Wolverine
+ * @author FelipeMoura
  */
 public class FrmSituacaoMovimentoAcademico extends javax.swing.JFrame {
     
-   
+   private List<Matriculas> listaAlunos;
+   private MovimentosAcademicos movimento;
+   private IMovimentosAcademicos telaMovimentos;
 
     /**
      * Creates new form FrmSituacaoControleCurso
      */
-    public FrmSituacaoMovimentoAcademico() {
+    public FrmSituacaoMovimentoAcademico(MovimentosAcademicos movimento, IMovimentosAcademicos telaMovimento ) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        this.movimento = movimento;
+        this.telaMovimentos = telaMovimento;
+    }
+    
+    public boolean saveMovimentoAcademico(Object objAluno){
+        return false;
     }
 
 
@@ -35,8 +50,8 @@ public class FrmSituacaoMovimentoAcademico extends javax.swing.JFrame {
 
         situacaobuttonGroup = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        canceladojRadioButton = new javax.swing.JRadioButton();
-        standbyjRadioButton = new javax.swing.JRadioButton();
+        aprovadojRadioButton = new javax.swing.JRadioButton();
+        reprovadojRadioButton = new javax.swing.JRadioButton();
         btnConfirmar = new javax.swing.JButton();
         btnPesquisar4 = new javax.swing.JButton();
 
@@ -46,23 +61,23 @@ public class FrmSituacaoMovimentoAcademico extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(0));
 
-        canceladojRadioButton.setBackground(new java.awt.Color(255, 255, 255));
-        situacaobuttonGroup.add(canceladojRadioButton);
-        canceladojRadioButton.setForeground(new java.awt.Color(0, 51, 0));
-        canceladojRadioButton.setText("Aprovado");
-        canceladojRadioButton.addActionListener(new java.awt.event.ActionListener() {
+        aprovadojRadioButton.setBackground(new java.awt.Color(255, 255, 255));
+        situacaobuttonGroup.add(aprovadojRadioButton);
+        aprovadojRadioButton.setForeground(new java.awt.Color(0, 51, 0));
+        aprovadojRadioButton.setText("Aprovado");
+        aprovadojRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                canceladojRadioButtonActionPerformed(evt);
+                aprovadojRadioButtonActionPerformed(evt);
             }
         });
 
-        standbyjRadioButton.setBackground(new java.awt.Color(255, 255, 255));
-        situacaobuttonGroup.add(standbyjRadioButton);
-        standbyjRadioButton.setText("Reprovado");
-        standbyjRadioButton.setBorder(null);
-        standbyjRadioButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        reprovadojRadioButton.setBackground(new java.awt.Color(255, 255, 255));
+        situacaobuttonGroup.add(reprovadojRadioButton);
+        reprovadojRadioButton.setText("Reprovado");
+        reprovadojRadioButton.setBorder(null);
+        reprovadojRadioButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -70,9 +85,9 @@ public class FrmSituacaoMovimentoAcademico extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(43, 43, 43)
-                .addComponent(canceladojRadioButton)
+                .addComponent(aprovadojRadioButton)
                 .addGap(35, 35, 35)
-                .addComponent(standbyjRadioButton)
+                .addComponent(reprovadojRadioButton)
                 .addContainerGap(47, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -80,8 +95,8 @@ public class FrmSituacaoMovimentoAcademico extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(canceladojRadioButton)
-                    .addComponent(standbyjRadioButton))
+                    .addComponent(aprovadojRadioButton)
+                    .addComponent(reprovadojRadioButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -92,6 +107,11 @@ public class FrmSituacaoMovimentoAcademico extends javax.swing.JFrame {
         btnConfirmar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnConfirmar.setPreferredSize(new java.awt.Dimension(80, 90));
         btnConfirmar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarActionPerformed(evt);
+            }
+        });
 
         btnPesquisar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         btnPesquisar4.setText("Cancelar");
@@ -136,13 +156,25 @@ public class FrmSituacaoMovimentoAcademico extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void canceladojRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_canceladojRadioButtonActionPerformed
+    private void aprovadojRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aprovadojRadioButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_canceladojRadioButtonActionPerformed
+    }//GEN-LAST:event_aprovadojRadioButtonActionPerformed
 
     private void btnPesquisar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisar4ActionPerformed
          this.dispose();
     }//GEN-LAST:event_btnPesquisar4ActionPerformed
+
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+
+       String status = aprovadojRadioButton.isSelected() ? "aprovado" : "reprovado";
+        MovimentoAcademicoController movimentoController = new MovimentoAcademicoController();
+        movimento.setSituacao(status);
+        if(movimentoController.salvar(movimento) != null) {
+            JOptionPane.showMessageDialog(rootPane, "Salvo com sucesso"); 
+            telaMovimentos.setModel();
+        }
+        this.dispose();
+    }//GEN-LAST:event_btnConfirmarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -150,12 +182,12 @@ public class FrmSituacaoMovimentoAcademico extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton aprovadojRadioButton;
     private javax.swing.JButton btnConfirmar;
     private javax.swing.JButton btnPesquisar4;
-    private javax.swing.JRadioButton canceladojRadioButton;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JRadioButton reprovadojRadioButton;
     private javax.swing.ButtonGroup situacaobuttonGroup;
-    private javax.swing.JRadioButton standbyjRadioButton;
     // End of variables declaration//GEN-END:variables
 
 

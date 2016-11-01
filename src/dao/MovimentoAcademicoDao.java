@@ -30,11 +30,11 @@ public class MovimentoAcademicoDao {
         return movimentosAcademicos;
     }
 
-    public List<ViewMovimentoAcademicos> listar(String sql) throws SQLException {
+    public List<MovimentosAcademicos> listar(String sql) throws SQLException {
         manager = ConexaoSingleton.getConexao();
         manager.getTransaction().begin();
         Query q = manager.createQuery(sql);
-        List<ViewMovimentoAcademicos> listaMovimentoAcademico = q.getResultList();
+        List<MovimentosAcademicos> listaMovimentoAcademico = q.getResultList();
         manager.getTransaction().commit();
         return listaMovimentoAcademico;
     }

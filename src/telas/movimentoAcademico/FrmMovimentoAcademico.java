@@ -4,13 +4,29 @@
  * and open the template in the editor.
  */
 package telas.movimentoAcademico; 
+import controller.CursosController;
+import controller.MatriculaController;
+import controller.MovimentoAcademicoController;
+import controller.TurmaController;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import model.Cursos;
+import model.Disciplinas;
+import model.Matriculas;
+import model.Alunos;
+import model.MovimentosAcademicos;
+import model.Turmas;
+import telas.aluno.ConsultaAlunosTableModel;
+import util.Formatacao;
 
 /**
  *
  * @author Kamila
  */
-public class FrmMovimentoAcademico extends javax.swing.JFrame {
-
+public class FrmMovimentoAcademico extends javax.swing.JFrame implements IMovimentosAcademicos {
+    private List<MovimentosAcademicos> listaAlunos;
+    private ConsultaMovimentosAcademicosTableModel modelMovimentos;
     /**
      * Creates new form FrmConsCurso
      */
@@ -18,6 +34,7 @@ public class FrmMovimentoAcademico extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        carregarComboCurso();
     }
 
     /**
@@ -38,8 +55,8 @@ public class FrmMovimentoAcademico extends javax.swing.JFrame {
         lblNomeCurso3 = new javax.swing.JLabel();
         lblNomeCurso4 = new javax.swing.JLabel();
         btnPesquisar = new javax.swing.JButton();
-        cbxTurma = new javax.swing.JComboBox<String>();
-        cbxDisciplina1 = new javax.swing.JComboBox<String>();
+        cbxTurma = new javax.swing.JComboBox<>();
+        cbxCursos = new javax.swing.JComboBox<>();
 
         jTextField2.setAlignmentX(0.1F);
         jTextField2.setAlignmentY(0.1F);
@@ -52,7 +69,7 @@ public class FrmMovimentoAcademico extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         tabelaCursos.setBackground(new java.awt.Color(204, 255, 204));
-        tabelaCursos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 255, 204), new java.awt.Color(204, 255, 204), null, null));
+        tabelaCursos.setBorder(new javax.swing.border.SoftBevelBorder(0, new java.awt.Color(204, 255, 204), new java.awt.Color(204, 255, 204), null, null));
         tabelaCursos.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         tabelaCursos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -99,7 +116,7 @@ public class FrmMovimentoAcademico extends javax.swing.JFrame {
         lblNomeCurso3.setText("Turma:");
         lblNomeCurso3.setAlignmentY(0.1F);
 
-        lblNomeCurso4.setText("Disciplina:");
+        lblNomeCurso4.setText("Curso:");
         lblNomeCurso4.setAlignmentY(0.1F);
 
         btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar.png"))); // NOI18N
@@ -112,9 +129,22 @@ public class FrmMovimentoAcademico extends javax.swing.JFrame {
             }
         });
 
-        cbxTurma.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione", "Item 2", "Item 3", "Item 4" }));
+        cbxTurma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxTurmaActionPerformed(evt);
+            }
+        });
 
-        cbxDisciplina1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione", "Item 2", "Item 3", "Item 4" }));
+        cbxCursos.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxCursosItemStateChanged(evt);
+            }
+        });
+        cbxCursos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxCursosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -126,15 +156,19 @@ public class FrmMovimentoAcademico extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNomeCurso3)
-                            .addComponent(cbxTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblNomeCurso4)
-                            .addComponent(cbxDisciplina1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(50, 50, 50)
-                        .addComponent(btnPesquisar)
-                        .addGap(0, 194, Short.MAX_VALUE)))
+                            .addComponent(cbxCursos, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblNomeCurso3)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(cbxTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(14, 14, 14)
+                        .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(99, 99, 99)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -148,8 +182,8 @@ public class FrmMovimentoAcademico extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(cbxTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cbxDisciplina1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cbxCursos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnPesquisar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblNomeCurso3)
@@ -182,66 +216,44 @@ public class FrmMovimentoAcademico extends javax.swing.JFrame {
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         // TODO add your handling code here:
+        setModel();
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        new FrmSituacaoMovimentoAcademico();
+        int linha = tabelaCursos.getSelectedRow();
+        if(linha >= 0){
+            new FrmSituacaoMovimentoAcademico(listaAlunos.get(linha), this);
+        }else {
+            JOptionPane.showMessageDialog(rootPane, "Selecione um Aluno");
+        }
+        
     }//GEN-LAST:event_btnExcluirActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmMovimentoAcademico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmMovimentoAcademico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmMovimentoAcademico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmMovimentoAcademico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+    private void cbxTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTurmaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxTurmaActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrmMovimentoAcademico().setVisible(true);
-            }
-        });
-    }
+    private void cbxCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCursosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxCursosActionPerformed
+
+    private void cbxCursosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxCursosItemStateChanged
+        // TODO add your handling code here:
+        Object obj = cbxCursos.getSelectedItem();
+        Cursos cursos = null;
+        if (obj instanceof Cursos) {
+            cursos = (Cursos) obj;
+        }
+        if (cursos != null) {
+            carregarComboTurmas(cursos);
+            setModel();
+        }
+    }//GEN-LAST:event_cbxCursosItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnPesquisar;
-    private javax.swing.JComboBox<String> cbxDisciplina1;
+    private javax.swing.JComboBox<String> cbxCursos;
     private javax.swing.JComboBox<String> cbxTurma;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -251,4 +263,63 @@ public class FrmMovimentoAcademico extends javax.swing.JFrame {
     private javax.swing.JLabel lblNomeCurso4;
     private javax.swing.JTable tabelaCursos;
     // End of variables declaration//GEN-END:variables
+    
+    
+    public void carregarComboTurmas(Cursos curso) {
+        TurmaController turmasController = new TurmaController();
+        cbxTurma.removeAllItems();
+        String sql = "select t from Turmas t where t.cursosId.id = "+curso.getId();
+        List<Turmas> listaTurma = turmasController.listar(sql);
+        if (listaTurma != null) {
+            cbxTurma = Formatacao.preencherComobox(listaTurma, cbxTurma, true, "Selecione");
+        } else {
+            cbxTurma.removeAllItems();
+        }
+    }
+    
+    public void carregarComboCurso() {
+        CursosController cursosController = new CursosController();
+        String sql = "select c from Cursos c order by c.nome";
+        List<Cursos> listaCursos = cursosController.listar(sql);
+        if (listaCursos != null) {
+            cbxCursos = Formatacao.preencherComobox(listaCursos, cbxCursos, true, "Selecione");
+        } else {
+            cbxCursos.removeAllItems();
+        }
+    }
+    @Override
+    public void setModel() {
+       
+        Cursos curso = null;
+        Object objCurso = cbxCursos.getSelectedItem();
+        Turmas turma = null;
+        Object objTurma = cbxTurma.getSelectedItem();
+        if(objTurma instanceof Turmas){
+            turma = (Turmas) objTurma;
+        } 
+        if(objCurso instanceof Cursos){
+            curso = (Cursos) objCurso;
+        } 
+        MovimentoAcademicoController movimentoController = new MovimentoAcademicoController();
+        if(curso == null || turma == null){
+            listaAlunos = new ArrayList<MovimentosAcademicos>();
+        } else {
+            String sql = "select m from MovimentosAcademicos m "
+                    + "where m.matriculasId.turmasId.id = "+turma.getId();
+
+            listaAlunos = movimentoController.listar(sql);
+
+            if (listaAlunos == null) {
+                listaAlunos = new ArrayList<MovimentosAcademicos>();
+            } 
+        }
+        modelMovimentos = new ConsultaMovimentosAcademicosTableModel(listaAlunos);
+            tabelaCursos.setModel(modelMovimentos);
+            tabelaCursos.getColumnModel().getColumn(0).setPreferredWidth(70);
+            tabelaCursos.getColumnModel().getColumn(1).setPreferredWidth(175);
+            tabelaCursos.getColumnModel().getColumn(2).setPreferredWidth(175);
+            tabelaCursos.getColumnModel().getColumn(3).setPreferredWidth(175);
+            tabelaCursos.repaint();
+    }
 }
+
