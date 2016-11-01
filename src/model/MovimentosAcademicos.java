@@ -5,10 +5,8 @@
  */
 package model;
 
-import java.io.Serializable;
-import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
+import java.io.Serializable; 
+import javax.persistence.Basic; 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,8 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.NamedQuery; 
 import javax.persistence.Table;
 
 /**
@@ -40,9 +37,7 @@ public class MovimentosAcademicos implements Serializable {
     private String situacao;
     @JoinColumn(name = "disciplinas_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Disciplinas disciplinasId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "matriculasId")
-    private List<MovimentosAcademicos> movimentosAcademicosList;
+    private Disciplinas disciplinasId; 
     @JoinColumn(name = "matriculas_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Matriculas matriculasId;
@@ -77,14 +72,7 @@ public class MovimentosAcademicos implements Serializable {
     public void setDisciplinasId(Disciplinas disciplinasId) {
         this.disciplinasId = disciplinasId;
     }
-
-    public List<MovimentosAcademicos> getMovimentosAcademicosList() {
-        return movimentosAcademicosList;
-    }
-
-    public void setMovimentosAcademicosList(List<MovimentosAcademicos> movimentosAcademicosList) {
-        this.movimentosAcademicosList = movimentosAcademicosList;
-    }
+ 
 
     public Matriculas getMatriculasId() {
         return matriculasId;

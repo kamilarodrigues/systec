@@ -3,6 +3,7 @@ package telas.aluno;
 import controller.AlunosController;
 import controller.CursosController;
 import controller.MatriculaController;
+import controller.MovimentoAcademicoController;
 import java.util.List;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
@@ -16,6 +17,7 @@ import javax.swing.JTextField;
 import model.Alunos;
 import model.Cursos;
 import model.Matriculas;
+import model.MovimentosAcademicos;
 import model.Turmas;
 import util.Formatacao;
 
@@ -250,6 +252,16 @@ public class FrmCadAluno extends JFrame {
         matriculas.setTurmasId(turmas);
         MatriculaController matriculaController = new MatriculaController();
         matriculas = matriculaController.salvar(matriculas);
+        Cursos cursos = turmas.getCursosId();
+        MovimentosAcademicos movimentosAcademicos;
+        MovimentoAcademicoController academicoController = new MovimentoAcademicoController();
+        for (int i = 0; i < cursos.getDisciplinasList().size(); i++) {
+            movimentosAcademicos = new MovimentosAcademicos();
+            movimentosAcademicos.setMatriculasId(matriculas);
+            movimentosAcademicos.setDisciplinasId(cursos.getDisciplinasList().get(i));
+            movimentosAcademicos.setSituacao("Em andamento");
+            academicoController.salvar(movimentosAcademicos);
+        }
         telaAluno.setModel();
         this.dispose();
     }
