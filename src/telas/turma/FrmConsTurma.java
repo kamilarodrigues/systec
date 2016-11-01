@@ -51,7 +51,7 @@ public class FrmConsTurma extends javax.swing.JFrame implements ITurmas {
         lblNomeCurso1.setText("Nome da Disciplina:");
         lblNomeCurso1.setAlignmentY(0.1F);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 

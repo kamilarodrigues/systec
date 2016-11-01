@@ -23,7 +23,7 @@ public class MovimentoAcademicoFacade {
         return movimentoAcademicoDao.salvar(movimentosAcademicos);
     }
     
-    public List<ViewMovimentoAcademicos> listar(String sql) throws SQLException{
+    public List<MovimentosAcademicos> listar(String sql) throws SQLException{
         movimentoAcademicoDao = new MovimentoAcademicoDao();
         return movimentoAcademicoDao.listar(sql);
     }

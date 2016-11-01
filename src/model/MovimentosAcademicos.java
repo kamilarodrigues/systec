@@ -45,7 +45,7 @@ public class MovimentosAcademicos implements Serializable {
     private List<MovimentosAcademicos> movimentosAcademicosList;
     @JoinColumn(name = "matriculas_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private MovimentosAcademicos matriculasId;
+    private Matriculas matriculasId;
 
     public MovimentosAcademicos() {
     }
@@ -86,13 +86,15 @@ public class MovimentosAcademicos implements Serializable {
         this.movimentosAcademicosList = movimentosAcademicosList;
     }
 
-    public MovimentosAcademicos getMatriculasId() {
+    public Matriculas getMatriculasId() {
         return matriculasId;
     }
 
-    public void setMatriculasId(MovimentosAcademicos matriculasId) {
+    public void setMatriculasId(Matriculas matriculasId) {
         this.matriculasId = matriculasId;
     }
+
+    
 
     @Override
     public int hashCode() {
