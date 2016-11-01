@@ -5,20 +5,25 @@
  */
 package telas.disciplina;
 
-import telas.curso.*;
+import controller.DisciplinaController;
+import java.util.ArrayList;
+import java.util.List;
+import model.Disciplinas;
+
 
 /**
  *
- * @author Kamila
+ * @author Alecsander
  */
-public class FrmConsDisciplina extends javax.swing.JFrame {
+public class FrmConsDisciplina extends javax.swing.JFrame implements IDisciplina{
+    
+    private List<Disciplinas> listaDisciplina;
+    private ConsultaDisciplinasTableModel modelDisciplina;
 
-    /**
-     * Creates new form FrmConsCurso
-     */
     public FrmConsDisciplina() {
         initComponents();
         this.setLocationRelativeTo(null);
+        setModel();
         this.setVisible(true);
     }
 
@@ -35,13 +40,13 @@ public class FrmConsDisciplina extends javax.swing.JFrame {
         lblNomeCurso1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         lblNomeCurso = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtNomeDisciplina = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaCursos = new javax.swing.JTable();
+        tabelaDisciplina = new javax.swing.JTable();
         btnPesquisar = new javax.swing.JButton();
         btnPesquisar3 = new javax.swing.JButton();
         btnPesquisar4 = new javax.swing.JButton();
-        jTextField3 = new javax.swing.JTextField();
+        txtNomeCurso = new javax.swing.JTextField();
         lblNomeCurso2 = new javax.swing.JLabel();
         btnPesquisar1 = new javax.swing.JButton();
 
@@ -58,13 +63,13 @@ public class FrmConsDisciplina extends javax.swing.JFrame {
         lblNomeCurso.setText("Nome da Disciplina:");
         lblNomeCurso.setAlignmentY(0.1F);
 
-        jTextField1.setAlignmentX(0.1F);
-        jTextField1.setAlignmentY(0.1F);
+        txtNomeDisciplina.setAlignmentX(0.1F);
+        txtNomeDisciplina.setAlignmentY(0.1F);
 
-        tabelaCursos.setBackground(new java.awt.Color(204, 255, 204));
-        tabelaCursos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 255, 204), new java.awt.Color(204, 255, 204), null, null));
-        tabelaCursos.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        tabelaCursos.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaDisciplina.setBackground(new java.awt.Color(204, 255, 204));
+        tabelaDisciplina.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 255, 204), new java.awt.Color(204, 255, 204), null, null));
+        tabelaDisciplina.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        tabelaDisciplina.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -83,15 +88,15 @@ public class FrmConsDisciplina extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tabelaCursos.setGridColor(new java.awt.Color(0, 102, 51));
-        tabelaCursos.setSelectionBackground(new java.awt.Color(0, 102, 51));
-        tabelaCursos.setSelectionForeground(new java.awt.Color(204, 255, 204));
-        tabelaCursos.addMouseListener(new java.awt.event.MouseAdapter() {
+        tabelaDisciplina.setGridColor(new java.awt.Color(0, 102, 51));
+        tabelaDisciplina.setSelectionBackground(new java.awt.Color(0, 102, 51));
+        tabelaDisciplina.setSelectionForeground(new java.awt.Color(204, 255, 204));
+        tabelaDisciplina.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabelaCursosMouseClicked(evt);
+                tabelaDisciplinaMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tabelaCursos);
+        jScrollPane1.setViewportView(tabelaDisciplina);
 
         btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/adicionar.png"))); // NOI18N
         btnPesquisar.setText("Novo");
@@ -122,8 +127,8 @@ public class FrmConsDisciplina extends javax.swing.JFrame {
         btnPesquisar4.setPreferredSize(new java.awt.Dimension(80, 90));
         btnPesquisar4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
-        jTextField3.setAlignmentX(0.1F);
-        jTextField3.setAlignmentY(0.1F);
+        txtNomeCurso.setAlignmentX(0.1F);
+        txtNomeCurso.setAlignmentY(0.1F);
 
         lblNomeCurso2.setText("Nome do Curso:");
         lblNomeCurso2.setAlignmentY(0.1F);
@@ -131,7 +136,6 @@ public class FrmConsDisciplina extends javax.swing.JFrame {
         btnPesquisar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar.png"))); // NOI18N
         btnPesquisar1.setText("Pesquisar");
         btnPesquisar1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnPesquisar1.setOpaque(false);
         btnPesquisar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPesquisar1ActionPerformed(evt);
@@ -156,13 +160,13 @@ public class FrmConsDisciplina extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNomeDisciplina, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblNomeCurso))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblNomeCurso2)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtNomeCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnPesquisar1)))
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -176,12 +180,12 @@ public class FrmConsDisciplina extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblNomeCurso)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtNomeDisciplina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblNomeCurso2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNomeCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnPesquisar1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
@@ -207,53 +211,28 @@ public class FrmConsDisciplina extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tabelaCursosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaCursosMouseClicked
+    private void tabelaDisciplinaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaDisciplinaMouseClicked
 
-    }//GEN-LAST:event_tabelaCursosMouseClicked
+    }//GEN-LAST:event_tabelaDisciplinaMouseClicked
 
     private void btnPesquisar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisar1ActionPerformed
-        // TODO add your handling code here:
+        DisciplinaController disciplinaController = new DisciplinaController();
+        String sql = "select d from Disciplinas d where d.nome like '%"+txtNomeDisciplina.getText()+"%'";
+        if(txtNomeCurso.getText().length()>0){
+            sql = sql+" and d.cursos.nome like '%"+txtNomeCurso.getText()+"%'";
+        }
+        listaDisciplina = disciplinaController.listar(sql);
+        if(listaDisciplina == null){
+            listaDisciplina = new ArrayList<Disciplinas>();
+        }
+        modelDisciplina = new ConsultaDisciplinasTableModel(listaDisciplina);
+        tabelaDisciplina.setModel(modelDisciplina);
+        tabelaDisciplina.repaint();
     }//GEN-LAST:event_btnPesquisar1ActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         new FrmCadDisciplina();
     }//GEN-LAST:event_btnPesquisarActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmConsDisciplina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmConsDisciplina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmConsDisciplina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmConsDisciplina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrmConsDisciplina().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPesquisar;
@@ -262,12 +241,26 @@ public class FrmConsDisciplina extends javax.swing.JFrame {
     private javax.swing.JButton btnPesquisar4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JLabel lblNomeCurso;
     private javax.swing.JLabel lblNomeCurso1;
     private javax.swing.JLabel lblNomeCurso2;
-    private javax.swing.JTable tabelaCursos;
+    private javax.swing.JTable tabelaDisciplina;
+    private javax.swing.JTextField txtNomeCurso;
+    private javax.swing.JTextField txtNomeDisciplina;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void setModel() {
+     
+        DisciplinaController disciplinaController = new DisciplinaController();
+        String sql = "select d from Disciplinas d order by d.nome,d.cursos.nome";
+        listaDisciplina = disciplinaController.listar(sql);
+        if(listaDisciplina == null){
+            listaDisciplina = new ArrayList<Disciplinas>();
+        }
+        modelDisciplina = new ConsultaDisciplinasTableModel(listaDisciplina);
+        tabelaDisciplina.setModel(modelDisciplina);
+        tabelaDisciplina.repaint();
+    }  
 }

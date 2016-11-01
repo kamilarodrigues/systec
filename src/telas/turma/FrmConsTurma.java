@@ -1,22 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package telas.turma; 
+
+import controller.TurmaController;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import model.Turmas;
 
 /**
  *
  * @author Kamila
  */
-public class FrmConsTurma extends javax.swing.JFrame {
+public class FrmConsTurma extends javax.swing.JFrame implements ITurmas {
 
-    /**
-     * Creates new form FrmConsCurso
-     */
+    private List<Turmas> listaTurmas;
+    private ConsultaTurmasTableModel modelTurmas;
+    
     public FrmConsTurma() {
         initComponents();
         this.setLocationRelativeTo(null);
+        setModel();
         this.setVisible(true);
     }
 
@@ -33,13 +35,13 @@ public class FrmConsTurma extends javax.swing.JFrame {
         lblNomeCurso1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         lblNomeCurso = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtCodigoTurma = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaCursos = new javax.swing.JTable();
+        tabelaTurmas = new javax.swing.JTable();
         btnPesquisar = new javax.swing.JButton();
-        btnPesquisar3 = new javax.swing.JButton();
-        btnPesquisar4 = new javax.swing.JButton();
-        jTextField3 = new javax.swing.JTextField();
+        btnEditar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+        txtNomeCurso = new javax.swing.JTextField();
         lblNomeCurso2 = new javax.swing.JLabel();
         btnPesquisar1 = new javax.swing.JButton();
 
@@ -49,20 +51,20 @@ public class FrmConsTurma extends javax.swing.JFrame {
         lblNomeCurso1.setText("Nome da Disciplina:");
         lblNomeCurso1.setAlignmentY(0.1F);
 
-        //setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         lblNomeCurso.setText("Código da Turma:");
         lblNomeCurso.setAlignmentY(0.1F);
 
-        jTextField1.setAlignmentX(0.1F);
-        jTextField1.setAlignmentY(0.1F);
+        txtCodigoTurma.setAlignmentX(0.1F);
+        txtCodigoTurma.setAlignmentY(0.1F);
 
-        tabelaCursos.setBackground(new java.awt.Color(204, 255, 204));
-        tabelaCursos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 255, 204), new java.awt.Color(204, 255, 204), null, null));
-        tabelaCursos.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        tabelaCursos.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaTurmas.setBackground(new java.awt.Color(204, 255, 204));
+        tabelaTurmas.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 255, 204), new java.awt.Color(204, 255, 204), null, null));
+        tabelaTurmas.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        tabelaTurmas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -81,15 +83,15 @@ public class FrmConsTurma extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tabelaCursos.setGridColor(new java.awt.Color(0, 102, 51));
-        tabelaCursos.setSelectionBackground(new java.awt.Color(0, 102, 51));
-        tabelaCursos.setSelectionForeground(new java.awt.Color(204, 255, 204));
-        tabelaCursos.addMouseListener(new java.awt.event.MouseAdapter() {
+        tabelaTurmas.setGridColor(new java.awt.Color(0, 102, 51));
+        tabelaTurmas.setSelectionBackground(new java.awt.Color(0, 102, 51));
+        tabelaTurmas.setSelectionForeground(new java.awt.Color(204, 255, 204));
+        tabelaTurmas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabelaCursosMouseClicked(evt);
+                tabelaTurmasMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tabelaCursos);
+        jScrollPane1.setViewportView(tabelaTurmas);
 
         btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/adicionar.png"))); // NOI18N
         btnPesquisar.setText("Novo");
@@ -104,24 +106,34 @@ public class FrmConsTurma extends javax.swing.JFrame {
             }
         });
 
-        btnPesquisar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/editar.png"))); // NOI18N
-        btnPesquisar3.setText("Editar");
-        btnPesquisar3.setBorder(null);
-        btnPesquisar3.setBorderPainted(false);
-        btnPesquisar3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnPesquisar3.setPreferredSize(new java.awt.Dimension(80, 90));
-        btnPesquisar3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/editar.png"))); // NOI18N
+        btnEditar.setText("Editar");
+        btnEditar.setBorder(null);
+        btnEditar.setBorderPainted(false);
+        btnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnEditar.setPreferredSize(new java.awt.Dimension(80, 90));
+        btnEditar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
-        btnPesquisar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluir.png"))); // NOI18N
-        btnPesquisar4.setText("Excluir");
-        btnPesquisar4.setBorder(null);
-        btnPesquisar4.setBorderPainted(false);
-        btnPesquisar4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnPesquisar4.setPreferredSize(new java.awt.Dimension(80, 90));
-        btnPesquisar4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/excluir.png"))); // NOI18N
+        btnExcluir.setText("Excluir");
+        btnExcluir.setBorder(null);
+        btnExcluir.setBorderPainted(false);
+        btnExcluir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnExcluir.setPreferredSize(new java.awt.Dimension(80, 90));
+        btnExcluir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
-        jTextField3.setAlignmentX(0.1F);
-        jTextField3.setAlignmentY(0.1F);
+        txtNomeCurso.setAlignmentX(0.1F);
+        txtNomeCurso.setAlignmentY(0.1F);
 
         lblNomeCurso2.setText("Nome do Curso:");
         lblNomeCurso2.setAlignmentY(0.1F);
@@ -129,7 +141,6 @@ public class FrmConsTurma extends javax.swing.JFrame {
         btnPesquisar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar.png"))); // NOI18N
         btnPesquisar1.setText("Pesquisar");
         btnPesquisar1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnPesquisar1.setOpaque(false);
         btnPesquisar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPesquisar1ActionPerformed(evt);
@@ -144,9 +155,9 @@ public class FrmConsTurma extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnPesquisar3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnPesquisar4, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(152, 152, 152))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -154,13 +165,13 @@ public class FrmConsTurma extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCodigoTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblNomeCurso))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblNomeCurso2)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtNomeCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnPesquisar1)))
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -177,15 +188,15 @@ public class FrmConsTurma extends javax.swing.JFrame {
                             .addComponent(lblNomeCurso2))
                         .addGap(26, 26, 26))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNomeCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnPesquisar1)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtCodigoTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
-                    .addComponent(btnPesquisar3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(btnPesquisar4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -202,69 +213,80 @@ public class FrmConsTurma extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tabelaCursosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaCursosMouseClicked
+    private void tabelaTurmasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaTurmasMouseClicked
 
-    }//GEN-LAST:event_tabelaCursosMouseClicked
+    }//GEN-LAST:event_tabelaTurmasMouseClicked
 
     private void btnPesquisar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisar1ActionPerformed
-        // TODO add your handling code here:
+        TurmaController turmaController = new TurmaController();
+        String sql = "select t from Turmas t where t.codigo like '%" + txtCodigoTurma.getText() + "%' ";
+        if (txtNomeCurso.getText().length()>0){
+            sql = sql + " and t.cursosId.nome like '%" + txtNomeCurso.getText() + "%' ";
+        }
+        sql = sql +" order by t.codigo";
+        listaTurmas = turmaController.listar(sql);
+        if (listaTurmas == null) {
+            listaTurmas = new ArrayList<Turmas>();
+        }
+        modelTurmas = new ConsultaTurmasTableModel(listaTurmas);
+        tabelaTurmas.setModel(modelTurmas);
+        tabelaTurmas.repaint();
     }//GEN-LAST:event_btnPesquisar1ActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        new FrmCadTurma();
+        Turmas turmas = new Turmas();
+        new FrmCadTurma(turmas, this);
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmConsTurma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmConsTurma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmConsTurma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmConsTurma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+       int linha = tabelaTurmas.getSelectedRow();
+       if(linha >= 0){
+           new FrmCadTurma(listaTurmas.get(linha), this);
+       }else{
+           JOptionPane.showMessageDialog(rootPane, "Selecione uma Turma");
+       }
+    }//GEN-LAST:event_btnEditarActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrmConsTurma().setVisible(true);
-            }
-        });
-    }
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        TurmaController turmasController = new TurmaController();
+        int linha = tabelaTurmas.getSelectedRow();
+        if(linha >= 0) {
+            turmasController.excluir(listaTurmas.get(linha).getId());
+            setModel();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Selecione uma Turma");
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnPesquisar1;
-    private javax.swing.JButton btnPesquisar3;
-    private javax.swing.JButton btnPesquisar4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JLabel lblNomeCurso;
     private javax.swing.JLabel lblNomeCurso1;
     private javax.swing.JLabel lblNomeCurso2;
-    private javax.swing.JTable tabelaCursos;
+    private javax.swing.JTable tabelaTurmas;
+    private javax.swing.JTextField txtCodigoTurma;
+    private javax.swing.JTextField txtNomeCurso;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void setModel() {
+        TurmaController turmaController = new TurmaController();
+        String sql = "select t from Turmas t order by t.codigo";
+        listaTurmas = turmaController.listar(sql);
+        if (listaTurmas == null) {
+            listaTurmas = new ArrayList<Turmas>();
+        }
+        modelTurmas = new ConsultaTurmasTableModel(listaTurmas);
+        tabelaTurmas.setModel(modelTurmas);
+        tabelaTurmas.repaint();
+    }
+    
+    
+    
 }
