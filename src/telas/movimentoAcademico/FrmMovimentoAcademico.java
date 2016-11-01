@@ -36,6 +36,7 @@ public class FrmMovimentoAcademico extends javax.swing.JFrame implements IMovime
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         carregarComboCurso();
+        setModel();
     }
 
     /**
@@ -184,8 +185,8 @@ public class FrmMovimentoAcademico extends javax.swing.JFrame implements IMovime
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(336, 336, 336)
-                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(289, 289, 289)
+                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
