@@ -5,6 +5,7 @@
  */
 package telas.movimentoAcademico; 
 import controller.CursosController;
+import controller.DisciplinaController;
 import controller.MatriculaController;
 import controller.MovimentoAcademicoController;
 import controller.TurmaController;
@@ -57,6 +58,8 @@ public class FrmMovimentoAcademico extends javax.swing.JFrame implements IMovime
         btnPesquisar = new javax.swing.JButton();
         cbxTurma = new javax.swing.JComboBox<>();
         cbxCursos = new javax.swing.JComboBox<>();
+        cbxDisciplinas = new javax.swing.JComboBox<>();
+        lblNomeCurso5 = new javax.swing.JLabel();
 
         jTextField2.setAlignmentX(0.1F);
         jTextField2.setAlignmentY(0.1F);
@@ -69,7 +72,7 @@ public class FrmMovimentoAcademico extends javax.swing.JFrame implements IMovime
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         tabelaCursos.setBackground(new java.awt.Color(204, 255, 204));
-        tabelaCursos.setBorder(new javax.swing.border.SoftBevelBorder(0, new java.awt.Color(204, 255, 204), new java.awt.Color(204, 255, 204), null, null));
+        tabelaCursos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 255, 204), new java.awt.Color(204, 255, 204), null, null));
         tabelaCursos.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         tabelaCursos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -102,7 +105,6 @@ public class FrmMovimentoAcademico extends javax.swing.JFrame implements IMovime
 
         btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/situacao.png"))); // NOI18N
         btnExcluir.setText("Situação");
-        btnExcluir.setBorder(null);
         btnExcluir.setBorderPainted(false);
         btnExcluir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnExcluir.setPreferredSize(new java.awt.Dimension(80, 90));
@@ -146,6 +148,15 @@ public class FrmMovimentoAcademico extends javax.swing.JFrame implements IMovime
             }
         });
 
+        cbxDisciplinas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxDisciplinasActionPerformed(evt);
+            }
+        });
+
+        lblNomeCurso5.setText("Disciplina:");
+        lblNomeCurso5.setAlignmentY(0.1F);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -160,20 +171,22 @@ public class FrmMovimentoAcademico extends javax.swing.JFrame implements IMovime
                             .addComponent(cbxCursos, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(27, 27, 27)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNomeCurso3)
+                            .addComponent(cbxTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(99, 229, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNomeCurso5)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lblNomeCurso3)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(cbxTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(14, 14, 14)
-                        .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(99, 99, 99)))
+                                .addComponent(cbxDisciplinas, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(336, 336, 336)
                 .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(401, 401, 401))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,18 +195,22 @@ public class FrmMovimentoAcademico extends javax.swing.JFrame implements IMovime
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(cbxTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cbxCursos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnPesquisar))
+                        .addComponent(cbxCursos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblNomeCurso3)
                             .addComponent(lblNomeCurso4))
                         .addGap(26, 26, 26)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                .addGap(7, 7, 7)
+                .addComponent(lblNomeCurso5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnPesquisar)
+                    .addComponent(cbxDisciplinas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -246,14 +263,20 @@ public class FrmMovimentoAcademico extends javax.swing.JFrame implements IMovime
         }
         if (cursos != null) {
             carregarComboTurmas(cursos);
+            carregarComboDisciplinas(cursos);
             setModel();
         }
     }//GEN-LAST:event_cbxCursosItemStateChanged
+
+    private void cbxDisciplinasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxDisciplinasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxDisciplinasActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JComboBox<String> cbxCursos;
+    private javax.swing.JComboBox<String> cbxDisciplinas;
     private javax.swing.JComboBox<String> cbxTurma;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -261,6 +284,7 @@ public class FrmMovimentoAcademico extends javax.swing.JFrame implements IMovime
     private javax.swing.JLabel lblNomeCurso1;
     private javax.swing.JLabel lblNomeCurso3;
     private javax.swing.JLabel lblNomeCurso4;
+    private javax.swing.JLabel lblNomeCurso5;
     private javax.swing.JTable tabelaCursos;
     // End of variables declaration//GEN-END:variables
     
@@ -287,6 +311,18 @@ public class FrmMovimentoAcademico extends javax.swing.JFrame implements IMovime
             cbxCursos.removeAllItems();
         }
     }
+    
+    public void carregarComboDisciplinas(Cursos curso){
+        DisciplinaController disciplinaController = new DisciplinaController();
+        cbxDisciplinas.removeAllItems();
+        String sql = "select d from Disciplinas d where d.cursos.id = "+curso.getId();
+        List<Disciplinas> listaDisciplinas = disciplinaController.listar(sql);
+        if (listaDisciplinas != null) {
+            cbxDisciplinas = Formatacao.preencherComobox(listaDisciplinas, cbxDisciplinas, true, "Selecione");
+        } else {
+            cbxDisciplinas.removeAllItems();
+        }
+    }
     @Override
     public void setModel() {
        
@@ -294,18 +330,26 @@ public class FrmMovimentoAcademico extends javax.swing.JFrame implements IMovime
         Object objCurso = cbxCursos.getSelectedItem();
         Turmas turma = null;
         Object objTurma = cbxTurma.getSelectedItem();
+        Object objDisciplina = cbxDisciplinas.getSelectedItem();
+        Disciplinas disciplina = null;
+        
+        if(objDisciplina instanceof Disciplinas){
+            disciplina =  (Disciplinas) objDisciplina;
+        }
         if(objTurma instanceof Turmas){
             turma = (Turmas) objTurma;
         } 
         if(objCurso instanceof Cursos){
             curso = (Cursos) objCurso;
         } 
+        
         MovimentoAcademicoController movimentoController = new MovimentoAcademicoController();
-        if(curso == null || turma == null){
+        if(curso == null || turma == null || disciplina==null){
             listaAlunos = new ArrayList<MovimentosAcademicos>();
         } else {
             String sql = "select m from MovimentosAcademicos m "
-                    + "where m.matriculasId.turmasId.id = "+turma.getId();
+                    + "where m.matriculasId.turmasId.id = "+turma.getId()+
+                    " and m.disciplinasId.id = "+disciplina.getId();
 
             listaAlunos = movimentoController.listar(sql);
 
@@ -315,7 +359,7 @@ public class FrmMovimentoAcademico extends javax.swing.JFrame implements IMovime
         }
         modelMovimentos = new ConsultaMovimentosAcademicosTableModel(listaAlunos);
             tabelaCursos.setModel(modelMovimentos);
-            tabelaCursos.getColumnModel().getColumn(0).setPreferredWidth(70);
+            tabelaCursos.getColumnModel().getColumn(0).setPreferredWidth(175);
             tabelaCursos.getColumnModel().getColumn(1).setPreferredWidth(175);
             tabelaCursos.getColumnModel().getColumn(2).setPreferredWidth(175);
             tabelaCursos.getColumnModel().getColumn(3).setPreferredWidth(175);
