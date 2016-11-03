@@ -123,10 +123,10 @@ public class FrmCadDisciplina extends JFrame {
                             .addComponent(txtNomeDisciplina, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                             .addComponent(lblNomeCurso)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(98, 98, 98)
-                        .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(76, 76, 76)
+                        .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnPesquisar4, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnPesquisar4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lblNomeCurso1))
@@ -201,7 +201,7 @@ public class FrmCadDisciplina extends JFrame {
         if (txtNomeDisciplina.getText().length() == 0) {
             dados = dados + " Disciplina não informada.";
         }
-        if (cbxCurso.getSelectedItem() == null) {
+        if (cbxCurso.getSelectedItem() == null || cbxCurso.getSelectedItem().toString().equalsIgnoreCase("Selecione")) {
             dados = dados + " Curso não informado.";
         }
         return dados;
