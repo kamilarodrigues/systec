@@ -1,10 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package tela.inicial;
+package telas.inicial;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JSeparator;
 import telas.aluno.FrmConsAluno;
 import telas.curso.FrmConsCurso;
 import telas.disciplina.FrmConsDisciplina;
@@ -20,18 +23,25 @@ import telas.usuario.UsuarioLogadoBean;
 public class FrmInicial extends javax.swing.JFrame {
 
     private UsuarioLogadoBean usuarioLogadoBean;
+    private JButton btnAluno, btnCurso, btnDisciplina1, btnNovo, btnSituacao, btnTrocarSenha, btnTurma1;
+    private JMenu jMenu1, jMenu2;
+    private JMenuBar jMenuBar1;
+    private JMenuItem jMenuItem1,jMenuItem2,jMenuItem3,jMenuItem4,jMenuItem5,jMenuItem6,jMenuItem7;
+    private JPanel jPanel1,jPanel2;
+    private JRadioButtonMenuItem jRadioButtonMenuItem1;
+    private JSeparator jSeparator1;
+    private JLabel lblLogoSysTM, lblNomeUsuario;
      
     public FrmInicial() { 
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         usuarioLogadoBean= new UsuarioLogadoBean();
-        new FrmLogin(this, true, usuarioLogadoBean, nomeUsuariojLabel);
+        new FrmLogin(this, true, usuarioLogadoBean, lblNomeUsuario);
     }
 
     
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    @SuppressWarnings("unchecked") 
     private void initComponents() {
 
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
@@ -39,7 +49,6 @@ public class FrmInicial extends javax.swing.JFrame {
         jMenuItem7 = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
-        logoSysTMjLabel = new javax.swing.JLabel();
         btnCurso = new javax.swing.JButton();
         btnAluno = new javax.swing.JButton();
         btnSituacao = new javax.swing.JButton();
@@ -47,7 +56,7 @@ public class FrmInicial extends javax.swing.JFrame {
         btnDisciplina1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         btnTrocarSenha = new javax.swing.JButton();
-        nomeUsuariojLabel = new javax.swing.JLabel();
+        lblNomeUsuario = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -68,12 +77,7 @@ public class FrmInicial extends javax.swing.JFrame {
         btnNovo.setBorderPainted(false);
         btnNovo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnNovo.setPreferredSize(new java.awt.Dimension(80, 90));
-        btnNovo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnNovo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNovoActionPerformed(evt);
-            }
-        });
+        btnNovo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM); 
 
         jMenuItem7.setText("jMenuItem7");
 
@@ -83,9 +87,9 @@ public class FrmInicial extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(0));
 
-        logoSysTMjLabel.setBackground(new java.awt.Color(247, 248, 247));
-        logoSysTMjLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        logoSysTMjLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/senai.png"))); // NOI18N
+        lblLogoSysTM.setBackground(new java.awt.Color(247, 248, 247));
+        lblLogoSysTM.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLogoSysTM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/senai.png"))); // NOI18N
 
         btnCurso.setBackground(new java.awt.Color(255, 255, 255));
         btnCurso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botaocurso.png"))); // NOI18N
@@ -169,9 +173,9 @@ public class FrmInicial extends javax.swing.JFrame {
             }
         });
 
-        nomeUsuariojLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        nomeUsuariojLabel.setForeground(new java.awt.Color(0, 51, 0));
-        nomeUsuariojLabel.setText("Usuario  :");
+        lblNomeUsuario.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblNomeUsuario.setForeground(new java.awt.Color(0, 51, 0));
+        lblNomeUsuario.setText("Usuario  :");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -179,7 +183,7 @@ public class FrmInicial extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(nomeUsuariojLabel)
+                .addComponent(lblNomeUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
                 .addComponent(btnTrocarSenha))
         );
@@ -187,7 +191,7 @@ public class FrmInicial extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(nomeUsuariojLabel)
+                .addComponent(lblNomeUsuario)
                 .addContainerGap(20, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -210,7 +214,7 @@ public class FrmInicial extends javax.swing.JFrame {
                         .addComponent(btnCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(logoSysTMjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblLogoSysTM, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnTurma1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -224,7 +228,7 @@ public class FrmInicial extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(logoSysTMjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblLogoSysTM, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                         .addComponent(btnSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -331,73 +335,61 @@ public class FrmInicial extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {
         new FrmConsAluno();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {
         new FrmConsCurso();
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {
          new FrmConsTurma();
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }
 
-    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {
        new FrmGerarRelatorios();
-    }//GEN-LAST:event_jMenu2ActionPerformed
+    }
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt){
         new FrmConsDisciplina();
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {
         new FrmMovimentoAcademico();
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    }
 
-    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-  
-    }//GEN-LAST:event_btnNovoActionPerformed
-
-    private void btnCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCursoActionPerformed
+    private void btnCursoActionPerformed(java.awt.event.ActionEvent evt) {
         new FrmConsCurso();
-    }//GEN-LAST:event_btnCursoActionPerformed
+    }
 
-    private void btnAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlunoActionPerformed
+    private void btnAlunoActionPerformed(java.awt.event.ActionEvent evt) {
         new FrmConsAluno();
-    }//GEN-LAST:event_btnAlunoActionPerformed
+    }
 
-    private void btnSituacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSituacaoActionPerformed
+    private void btnSituacaoActionPerformed(java.awt.event.ActionEvent evt) {
         new FrmMovimentoAcademico();
-    }//GEN-LAST:event_btnSituacaoActionPerformed
+    }
 
-    private void btnTurma1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTurma1ActionPerformed
+    private void btnTurma1ActionPerformed(java.awt.event.ActionEvent evt) {
         new FrmConsTurma();
-    }//GEN-LAST:event_btnTurma1ActionPerformed
+    }
 
-    private void btnDisciplina1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDisciplina1ActionPerformed
+    private void btnDisciplina1ActionPerformed(java.awt.event.ActionEvent evt) {
         new FrmConsDisciplina();
-    }//GEN-LAST:event_btnDisciplina1ActionPerformed
+    }
 
-    private void btnTrocarSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrocarSenhaActionPerformed
+    private void btnTrocarSenhaActionPerformed(java.awt.event.ActionEvent evt) {
         new FrmAlterarSenha(usuarioLogadoBean.getUsuario());
-    }//GEN-LAST:event_btnTrocarSenhaActionPerformed
+    }
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {
          new FrmGerarRelatorios();
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
+    }
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -414,39 +406,12 @@ public class FrmInicial extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(FrmInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new FrmInicial().setVisible(true);
             }
         });
     }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAluno;
-    private javax.swing.JButton btnCurso;
-    private javax.swing.JButton btnDisciplina1;
-    private javax.swing.JButton btnNovo;
-    private javax.swing.JButton btnSituacao;
-    private javax.swing.JButton btnTrocarSenha;
-    private javax.swing.JButton btnTurma1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel logoSysTMjLabel;
-    private javax.swing.JLabel nomeUsuariojLabel;
-    // End of variables declaration//GEN-END:variables
+ 
 }
