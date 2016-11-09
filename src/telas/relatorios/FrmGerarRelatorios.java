@@ -23,7 +23,7 @@ public class FrmGerarRelatorios extends javax.swing.JFrame {
     private JButton btnGerarRelatorio;
     private JComboBox<String> cbxCurso, cbxDisciplina, cbxTurma;
     private JPanel jPanel1;
-    private JLabel lblNomeCurso, lblNomeTurma, lblNomeDisciplina;
+    private JLabel lblNomeCurso, lblNomeTurma, lblNomeDisciplina, lblObservacao;
 
     public FrmGerarRelatorios() {
         //carregando os componentes da tela
@@ -45,8 +45,9 @@ public class FrmGerarRelatorios extends javax.swing.JFrame {
         cbxDisciplina = new javax.swing.JComboBox<>();
         cbxCurso = new javax.swing.JComboBox<>();
         lblNomeCurso = new javax.swing.JLabel();
+        lblObservacao = new javax.swing.JLabel();
 
-        setTitle("Movimento Academico");
+        setTitle("Gerar Relatório");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -55,6 +56,9 @@ public class FrmGerarRelatorios extends javax.swing.JFrame {
 
         lblNomeDisciplina.setText("Disciplina:");
         lblNomeDisciplina.setAlignmentY(0.1F);
+        
+        lblObservacao.setText("Obs: O campo disciplina é opcional.");
+        lblObservacao.setAlignmentY(0.1F);
 
         btnGerarRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar.png")));
         btnGerarRelatorio.setText("Gerar Relatório");
@@ -89,6 +93,7 @@ public class FrmGerarRelatorios extends javax.swing.JFrame {
                                                 .addComponent(cbxDisciplina, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(lblNomeDisciplina)
                                                 .addComponent(lblNomeCurso)
+                                                .addComponent(lblObservacao)
                                                 .addComponent(cbxTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(btnGerarRelatorio, javax.swing.GroupLayout.Alignment.TRAILING)))
                                 .addContainerGap(19, Short.MAX_VALUE))
@@ -109,6 +114,8 @@ public class FrmGerarRelatorios extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cbxDisciplina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblObservacao)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnGerarRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
