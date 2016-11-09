@@ -3,6 +3,9 @@ package telas.aluno;
 import controller.CursosController;
 import controller.MatriculaController;
 import facade.MatriculasFacade;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +50,9 @@ public class FrmConsAluno extends javax.swing.JFrame implements IAlunos {
 
     @SuppressWarnings("unchecked")
     private void inserindoComponentes() {
+        URL url = this.getClass().getResource("/imagens/iconSysTEC.png");  
+        Image iconSysTEC = Toolkit.getDefaultToolkit().getImage(url);  
+        this.setIconImage(iconSysTEC);
         jPanel = new javax.swing.JPanel();
         lblNomeAluno = new javax.swing.JLabel();
         txtNomeAluno = new javax.swing.JTextField();

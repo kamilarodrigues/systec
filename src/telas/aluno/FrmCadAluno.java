@@ -4,6 +4,9 @@ import controller.AlunosController;
 import controller.CursosController;
 import controller.MatriculaController;
 import controller.MovimentoAcademicoController;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 import java.util.List;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
@@ -60,7 +63,9 @@ public class FrmCadAluno extends JFrame {
 
     @SuppressWarnings("unchecked")
     private void inserindoComponentes() {
-
+        URL url = this.getClass().getResource("/imagens/iconSysTEC.png");  
+        Image iconSysTEC = Toolkit.getDefaultToolkit().getImage(url);  
+        this.setIconImage(iconSysTEC);
         jPanel1 = new JPanel();
         lblMatricula = new JLabel();
         txtMatricula = new JTextField();

@@ -1,6 +1,9 @@
 package telas.inicial;
   
 import controller.UsuarioController;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.logging.Level;
@@ -36,7 +39,9 @@ public class FrmAlterarSenha extends javax.swing.JDialog {
  
     @SuppressWarnings("unchecked")
     private void initComponents() {
-
+        URL url = this.getClass().getResource("/imagens/iconSysTEC.png");  
+        Image iconSysTEC = Toolkit.getDefaultToolkit().getImage(url);  
+        this.setIconImage(iconSysTEC);
         jPanel1 = new javax.swing.JPanel();
         btnSalvar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();

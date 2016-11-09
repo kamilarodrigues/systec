@@ -2,6 +2,9 @@ package telas.turma;
 
 import controller.CursosController;
 import controller.TurmaController;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -46,7 +49,11 @@ public class FrmCadTurma extends javax.swing.JFrame {
     }
 
         @SuppressWarnings("unchecked")
-    private void initComponents() {        jPanel1 = new javax.swing.JPanel();
+    private void initComponents() {        
+        URL url = this.getClass().getResource("/imagens/iconSysTEC.png");  
+        Image iconSysTEC = Toolkit.getDefaultToolkit().getImage(url);  
+        this.setIconImage(iconSysTEC);
+        jPanel1 = new javax.swing.JPanel();
         lblTurma = new javax.swing.JLabel();
         txtCodigoTurma = new javax.swing.JTextField();
         btnConfirmar = new javax.swing.JButton();

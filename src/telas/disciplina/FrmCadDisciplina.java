@@ -2,6 +2,9 @@ package telas.disciplina;
 
 import controller.CursosController;
 import controller.DisciplinaController;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -55,6 +58,9 @@ public class FrmCadDisciplina extends JFrame {
 
     @SuppressWarnings("unchecked")
     private void inserindoComponentes() {
+        URL url = this.getClass().getResource("/imagens/iconSysTEC.png");  
+        Image iconSysTEC = Toolkit.getDefaultToolkit().getImage(url);  
+        this.setIconImage(iconSysTEC);
         jPanel1 = new javax.swing.JPanel();
         lblDisciplina = new javax.swing.JLabel();
         txtNomeDisciplina = new javax.swing.JTextField();

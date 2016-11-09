@@ -4,6 +4,9 @@ import controller.CursosController;
 import controller.DisciplinaController; 
 import controller.MovimentoAcademicoController;
 import controller.TurmaController;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
@@ -48,7 +51,9 @@ public class FrmMovimentoAcademico extends javax.swing.JFrame implements IMovime
     
     @SuppressWarnings("unchecked")
     private void initComponents() {
-
+        URL url = this.getClass().getResource("/imagens/iconSysTEC.png");  
+        Image iconSysTEC = Toolkit.getDefaultToolkit().getImage(url);  
+        this.setIconImage(iconSysTEC);
         jTextField2 = new javax.swing.JTextField(); 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();

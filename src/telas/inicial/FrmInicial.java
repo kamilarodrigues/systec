@@ -1,5 +1,8 @@
 package telas.inicial;
 
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -43,7 +46,7 @@ public class FrmInicial extends javax.swing.JFrame {
     
     @SuppressWarnings("unchecked") 
     private void initComponents() {
-
+        
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         btnNovo = new javax.swing.JButton();
         jMenuItem7 = new javax.swing.JMenuItem();
@@ -244,6 +247,10 @@ public class FrmInicial extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        URL url = this.getClass().getResource("/imagens/iconSysTEC.png");  
+        Image iconSysTEC = Toolkit.getDefaultToolkit().getImage(url);  
+        this.setIconImage(iconSysTEC);
+        
         jMenuBar1.setBackground(new java.awt.Color(0, 51, 0));
         jMenuBar1.setBorder(new javax.swing.border.SoftBevelBorder(0, new java.awt.Color(0, 51, 0), new java.awt.Color(0, 51, 0), new java.awt.Color(0, 51, 0), new java.awt.Color(0, 51, 0)));
         jMenuBar1.setForeground(new java.awt.Color(0, 51, 0));

@@ -1,6 +1,9 @@
 package telas.relatorios;
 
 import controller.CursosController;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +39,9 @@ public class FrmGerarRelatorios extends javax.swing.JFrame {
 
     @SuppressWarnings("unchecked")
     private void initComponents() {
-
+        URL url = this.getClass().getResource("/imagens/iconSysTEC.png");  
+        Image iconSysTEC = Toolkit.getDefaultToolkit().getImage(url);  
+        this.setIconImage(iconSysTEC);
         jPanel1 = new javax.swing.JPanel();
         lblNomeTurma = new javax.swing.JLabel();
         lblNomeDisciplina = new javax.swing.JLabel();

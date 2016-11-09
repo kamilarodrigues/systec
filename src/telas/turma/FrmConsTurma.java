@@ -1,6 +1,9 @@
 package telas.turma; 
 
 import controller.TurmaController;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
@@ -35,9 +38,12 @@ public class FrmConsTurma extends javax.swing.JFrame implements ITurmas {
         this.setVisible(true);
     }
 
-        @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")
     private void initComponents() {
- 
+            
+        URL url = this.getClass().getResource("/imagens/iconSysTEC.png");  
+        Image iconSysTEC = Toolkit.getDefaultToolkit().getImage(url);  
+        this.setIconImage(iconSysTEC);
         jPanel1 = new javax.swing.JPanel();
         lblNomeCurso = new javax.swing.JLabel();
         txtCodigoTurma = new javax.swing.JTextField();

@@ -1,6 +1,9 @@
 package telas.curso;
 
 import controller.CursosController;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -36,6 +39,9 @@ public class FrmConsCurso extends javax.swing.JFrame implements ICurso{
     @SuppressWarnings("unchecked") 
     private void inserindoComponentes() {
         //componentes da pagina consulta de curso
+        URL url = this.getClass().getResource("/imagens/iconSysTEC.png");  
+        Image iconSysTEC = Toolkit.getDefaultToolkit().getImage(url);  
+        this.setIconImage(iconSysTEC);
         jPanel1 = new javax.swing.JPanel();
         lblNomeCurso = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();

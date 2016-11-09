@@ -1,6 +1,9 @@
 package telas.movimentoAcademico; 
 
 import controller.MovimentoAcademicoController;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 
 import java.util.List;
 import javax.swing.ButtonGroup;
@@ -40,7 +43,9 @@ public class FrmSituacaoMovimentoAcademico extends javax.swing.JFrame {
 
     @SuppressWarnings("unchecked")
     private void initComponents() {
-
+URL url = this.getClass().getResource("/imagens/iconSysTEC.png");  
+        Image iconSysTEC = Toolkit.getDefaultToolkit().getImage(url);  
+        this.setIconImage(iconSysTEC);
         situacaobuttonGroup = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         aprovadojRadioButton = new javax.swing.JRadioButton();

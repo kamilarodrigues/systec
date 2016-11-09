@@ -1,6 +1,9 @@
 package telas.disciplina;
 
 import controller.DisciplinaController;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
@@ -36,6 +39,9 @@ public class FrmConsDisciplina extends javax.swing.JFrame implements IDisciplina
 
     @SuppressWarnings("unchecked")
     private void iniciandoComponentes() {
+        URL url = this.getClass().getResource("/imagens/iconSysTEC.png");  
+        Image iconSysTEC = Toolkit.getDefaultToolkit().getImage(url);  
+        this.setIconImage(iconSysTEC);
         lblNomeCurso1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         lblNomeCurso = new javax.swing.JLabel();
