@@ -34,6 +34,7 @@ public class FrmCadAluno extends JFrame {
     private JComboBox<String> cbxCurso;
     private JComboBox cbxTurma;
     private JPanel jPanel1;
+    private boolean alteracao;
     private JLabel lblMatricula, lblNomeAluno, lblNomeTurma, lblNomeCurso;
     private JTextField txtMatricula, txtNomeAluno;
 
@@ -44,7 +45,9 @@ public class FrmCadAluno extends JFrame {
         carregarComboCurso();
         if (matriculas.getId() == null) {
             alunos = new Alunos();
+            alteracao=false;
         } else {
+            alteracao=true;
             alunos = matriculas.getAlunosId();
             txtMatricula.setText(matriculas.getMatricula());
             txtNomeAluno.setText(alunos.getNome());
@@ -258,12 +261,14 @@ public class FrmCadAluno extends JFrame {
         Cursos cursos = turmas.getCursosId();
         MovimentosAcademicos movimentosAcademicos;
         MovimentoAcademicoController academicoController = new MovimentoAcademicoController();
-        for (int i = 0; i < cursos.getDisciplinasList().size(); i++) {
-            movimentosAcademicos = new MovimentosAcademicos();
-            movimentosAcademicos.setMatriculasId(matriculas);
-            movimentosAcademicos.setDisciplinasId(cursos.getDisciplinasList().get(i));
-            movimentosAcademicos.setSituacao("Em andamento");
-            academicoController.salvar(movimentosAcademicos);
+        if(!alteracao){ 
+            for (int i = 0; i < cursos.getDisciplinasList().size(); i++) {
+                movimentosAcademicos = new MovimentosAcademicos();
+                movimentosAcademicos.setMatriculasId(matriculas);
+                movimentosAcademicos.setDisciplinasId(cursos.getDisciplinasList().get(i));
+                movimentosAcademicos.setSituacao("Em andamento");
+                academicoController.salvar(movimentosAcademicos);
+            }
         }
         telaAluno.setModel();
         this.dispose();

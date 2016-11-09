@@ -103,7 +103,7 @@ public class Matriculas implements Serializable {
 
     @Override
     public String toString() {
-        return "models.Matriculas[ id=" + id + " ]";
+        return getAlunosId().getNome();
     }
     
 }

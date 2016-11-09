@@ -179,39 +179,40 @@ public class FrmGerarRelatorios extends javax.swing.JFrame {
     public void btnGerarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {
         if (cbxCurso.getSelectedItem() != null && !cbxCurso.getSelectedItem().toString().equalsIgnoreCase("Selecione")) {
             if (cbxTurma.getSelectedItem() != null && !cbxTurma.getSelectedItem().toString().equalsIgnoreCase("Selecione")) {
+                Object obj = cbxTurma.getSelectedItem();
+                Turmas turmas = null;
+                if (obj instanceof Turmas) {
+                    turmas = (Turmas) obj;
+                }
+                Disciplinas disciplinas = null;
                 if (cbxDisciplina.getSelectedItem() != null && !cbxDisciplina.getSelectedItem().toString().equalsIgnoreCase("Selecione")) {
-                    Object obj = cbxDisciplina.getSelectedItem();
-                    Disciplinas disciplinas = null;
+                    obj = cbxDisciplina.getSelectedItem();
                     if (obj instanceof Disciplinas) {
                         disciplinas = (Disciplinas) obj;
                     }
-                    obj = cbxTurma.getSelectedItem();
-                    Turmas turmas = null;
-                    if (obj instanceof Turmas) {
-                        turmas = (Turmas) obj;
-                    }
-                    String sql = "select distinct matriculas.matricula, alunos.nome as aluno, movimentos_academicos.situacao, disciplinas.nome as disciplina"
-                            + " from movimentos_academicos"
-                            + " join matriculas on movimentos_academicos.matriculas_id = matriculas.id"
-                            + " join alunos on matriculas.alunos_id = alunos.id"
-                            + " join turmas on matriculas.turmas_id = turmas.id"
-                            + " join disciplinas on movimentos_academicos.disciplinas_id = disciplinas.id"
-                            + " where disciplinas.id=" + disciplinas.getId()+ " and"
-                            + " turmas.id="+turmas.getId()+" order by disciplinas.nome";
-                    String url = ("reports/relatorioTurma.jasper");
-                    Map parameters = new HashMap();
-                    parameters.put("disciplina", disciplinas.getNome());
-                    parameters.put("turma", turmas.getCodigo());
-                    try {
-                        parameters.put("sql", sql);
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(this, "Não foi possível gerar o relatório " + ex);
-                        ex.printStackTrace();
-                    }
-                    new RelatoriosJasper(url, parameters);
-                } else {
-                    JOptionPane.showMessageDialog(rootPane, "Informe a Disciplina.");
+                } 
+                String sql = "select distinct matriculas.matricula, alunos.nome as aluno, movimentos_academicos.situacao, disciplinas.nome as disciplina, disciplinas.id"
+                        + " from movimentos_academicos"
+                        + " join matriculas on movimentos_academicos.matriculas_id = matriculas.id"
+                        + " join alunos on matriculas.alunos_id = alunos.id"
+                        + " join turmas on matriculas.turmas_id = turmas.id"
+                        + " join disciplinas on movimentos_academicos.disciplinas_id = disciplinas.id"
+                        + " join cursos on disciplinas.cursos_id = cursos.id" 
+                        + " where ";
+                if (disciplinas != null) {
+                    sql = sql + "disciplinas.id=" + disciplinas.getId() + " and";
                 }
+                sql = sql + " turmas.id=" + turmas.getId() + " and cursos.id="+turmas.getCursosId().getId()+" order by disciplinas.nome";
+                String url = ("reports/relatorioTurma.jasper");
+                Map parameters = new HashMap();  
+                parameters.put("turma", turmas.getCodigo());
+                try {
+                    parameters.put("sql", sql);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Não foi possível gerar o relatório " + ex);
+                    ex.printStackTrace();
+                }
+                new RelatoriosJasper(url, parameters);
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Informe a turma.");
             }

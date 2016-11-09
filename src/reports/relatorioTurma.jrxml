@@ -14,6 +14,7 @@
 		</conditionalStyle>
 	</style>
 	<parameter name="sql" class="java.lang.String"/>
+	<parameter name="turma" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[$P!{sql}]]>
 	</queryString>
@@ -25,8 +26,40 @@
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="disciplina" class="java.lang.String"/>
-	<group name="Group1">
-		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/15)]]></groupExpression>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="grupoDisciplina" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[$F{id}]]></groupExpression>
+		<groupHeader>
+			<band height="67">
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="0" y="17" width="209" height="18" forecolor="#017338" uuid="f030e48f-6689-402b-9020-c025d59d14de"/>
+					<textElement>
+						<font size="14" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{disciplina}]]></textFieldExpression>
+				</textField>
+				<frame>
+					<reportElement mode="Opaque" x="2" y="49" width="554" height="18" forecolor="#CCCCCC" backcolor="#F2F2F2" uuid="8a06e5b3-42f0-4cc8-b78c-a7604c9ed1b3"/>
+					<staticText>
+						<reportElement style="Column header" x="120" y="0" width="289" height="15" forecolor="#017338" uuid="98c3dbc2-b357-46ef-9638-f91b58053b19"/>
+						<text><![CDATA[Aluno]]></text>
+					</staticText>
+					<staticText>
+						<reportElement style="Column header" x="0" y="0" width="109" height="15" forecolor="#017338" uuid="53cb9104-58af-413e-b58f-3454508ebbec"/>
+						<text><![CDATA[Matricula]]></text>
+					</staticText>
+					<staticText>
+						<reportElement style="Column header" x="418" y="0" width="133" height="15" forecolor="#017338" uuid="f3efc911-ba79-460c-ad7a-f583b1db7c2c"/>
+						<text><![CDATA[Situação]]></text>
+					</staticText>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="5"/>
+		</groupFooter>
 	</group>
 	<group name="Group2">
 		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/5)]]></groupExpression>
@@ -35,73 +68,37 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="58" splitType="Stretch">
-			<staticText>
-				<reportElement style="SubTitle" x="1" y="27" width="554" height="22" forecolor="#333333" uuid="aaf88943-b13b-4097-b84c-a35fa6a5a00f"/>
-				<textElement textAlignment="Center">
-					<font fontName="Arial" isBold="true" pdfFontName="Times-Roman"/>
-				</textElement>
-				<text><![CDATA[Turma N1 2016/1 - Técnico em Informatica]]></text>
-			</staticText>
+		<band height="73" splitType="Stretch">
 			<image>
 				<reportElement x="0" y="0" width="187" height="27" uuid="7650172a-050b-43a8-909c-37fd796ac376"/>
 				<imageExpression><![CDATA["C:\\Users\\Kamila\\Documents\\PI\\imagens\\senai.png"]]></imageExpression>
 			</image>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="1" y="27" width="554" height="28" uuid="5a133dd2-8dca-447f-bdbe-cc8fd32bf739"/>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Turma "+$P{turma}+" - Técnico em Informatica"]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>
 		<band splitType="Stretch"/>
 	</pageHeader>
-	<columnHeader>
-		<band height="16" splitType="Stretch">
-			<frame>
-				<reportElement mode="Opaque" x="1" y="0" width="554" height="15" forecolor="#CCCCCC" backcolor="#F2F2F2" uuid="8a06e5b3-42f0-4cc8-b78c-a7604c9ed1b3"/>
-			</frame>
-			<staticText>
-				<reportElement style="Column header" x="86" y="1" width="157" height="15" forecolor="#017338" uuid="98c3dbc2-b357-46ef-9638-f91b58053b19"/>
-				<text><![CDATA[Aluno]]></text>
-			</staticText>
-			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="14" width="555" height="1" forecolor="#017338" uuid="0fe4059a-eac6-4d4b-8b24-8eba8755a3f1"/>
-				<graphicElement>
-					<pen lineWidth="0.5" lineColor="#999999"/>
-				</graphicElement>
-			</line>
-			<staticText>
-				<reportElement style="Column header" x="1" y="0" width="84" height="15" forecolor="#017338" uuid="53cb9104-58af-413e-b58f-3454508ebbec"/>
-				<text><![CDATA[Matricula]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="243" y="1" width="69" height="15" forecolor="#017338" uuid="f3efc911-ba79-460c-ad7a-f583b1db7c2c"/>
-				<text><![CDATA[Situação]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="312" y="1" width="243" height="15" forecolor="#017338" uuid="c7a501fd-9d67-4131-966b-c0b31f87256a"/>
-				<text><![CDATA[Disciplina]]></text>
-			</staticText>
-		</band>
-	</columnHeader>
 	<detail>
-		<band height="18" splitType="Stretch">
-			<frame>
-				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="15" uuid="e90a7503-d1d9-4736-87d0-63d32a156cbe"/>
-				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" x="85" y="0" width="158" height="15" uuid="b8fa172a-969d-481d-9f05-521a0ce004ae"/>
-					<textFieldExpression><![CDATA[$F{aluno}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" x="1" y="0" width="85" height="15" uuid="a9312a4f-2e85-4705-a0b4-5578608df1c1"/>
-					<textFieldExpression><![CDATA[$F{matricula}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" x="243" y="0" width="69" height="15" uuid="27512622-bc93-4284-8271-35f2238b59fc"/>
-					<textFieldExpression><![CDATA[$F{situacao}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" x="313" y="0" width="242" height="15" uuid="fc273982-1414-4f1d-a566-229f255aba09"/>
-					<textFieldExpression><![CDATA[$F{disciplina}]]></textFieldExpression>
-				</textField>
-			</frame>
+		<band height="20" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="0" y="0" width="110" height="15" uuid="a9312a4f-2e85-4705-a0b4-5578608df1c1"/>
+				<textFieldExpression><![CDATA[$F{matricula}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="119" y="0" width="290" height="15" uuid="b8fa172a-969d-481d-9f05-521a0ce004ae"/>
+				<textFieldExpression><![CDATA[$F{aluno}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Detail" x="418" y="0" width="133" height="15" uuid="27512622-bc93-4284-8271-35f2238b59fc"/>
+				<textFieldExpression><![CDATA[$F{situacao}]]></textFieldExpression>
+			</textField>
 			<line>
 				<reportElement positionType="FixRelativeToBottom" x="1" y="16" width="555" height="1" backcolor="#FFFFF2" uuid="61b67ebf-fd75-4d90-a16c-87396b88c6f5"/>
 				<graphicElement>
@@ -111,9 +108,9 @@
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="14" splitType="Stretch">
+		<band height="17" splitType="Stretch">
 			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="1" width="555" height="1" uuid="2160c9cb-797f-4897-a782-46bfdbe41703"/>
+				<reportElement positionType="FixRelativeToBottom" x="-1" y="-55" width="556" height="1" uuid="2160c9cb-797f-4897-a782-46bfdbe41703"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
