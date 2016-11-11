@@ -154,14 +154,19 @@ URL url = this.getClass().getResource("/imagens/iconSysTEC.png");
     }
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {
-       String status = aprovadojRadioButton.isSelected() ? "aprovado" : "reprovado";
-        MovimentoAcademicoController movimentoController = new MovimentoAcademicoController();
-        movimento.setSituacao(status);
-        if(movimentoController.salvar(movimento) != null) {
-            JOptionPane.showMessageDialog(rootPane, "Salvo com sucesso"); 
+        if(aprovadojRadioButton.isSelected() || reprovadojRadioButton.isSelected() ){
+            String status = aprovadojRadioButton.isSelected() ? "aprovado" : "reprovado";
+            MovimentoAcademicoController movimentoController = new MovimentoAcademicoController();
+            movimento.setSituacao(status);
+            if(movimentoController.salvar(movimento) != null) {
+                JOptionPane.showMessageDialog(rootPane, "Salvo com sucesso"); 
+                telaMovimentos.setModel();
+                this.dispose();
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Selecione uma opção!!"); 
             telaMovimentos.setModel();
         }
-        this.dispose();
     }
 
 }
