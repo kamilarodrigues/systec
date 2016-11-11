@@ -267,6 +267,7 @@ public class FrmCadAluno extends JFrame {
         MovimentosAcademicos movimentosAcademicos;
         MovimentoAcademicoController academicoController = new MovimentoAcademicoController();
         if(!alteracao){ 
+            
             for (int i = 0; i < cursos.getDisciplinasList().size(); i++) {
                 movimentosAcademicos = new MovimentosAcademicos();
                 movimentosAcademicos.setMatriculasId(matriculas);
