@@ -352,6 +352,7 @@ public class FrmConsAluno extends javax.swing.JFrame implements IAlunos {
         if (linha >= 0) {
             try {
                 matriculasFacade.excluir(listaAlunos.get(linha).getId());
+                JOptionPane.showMessageDialog(rootPane, "Excluído com sucesso!");
             } catch (SQLException ex) {
                 Logger.getLogger(FrmConsAluno.class.getName()).log(Level.SEVERE, null, ex);
             }

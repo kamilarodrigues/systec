@@ -247,6 +247,7 @@ public class FrmConsTurma extends javax.swing.JFrame implements ITurmas {
         int linha = tabelaTurmas.getSelectedRow();
         if(linha >= 0) {
             turmasController.excluir(listaTurmas.get(linha).getId());
+             JOptionPane.showMessageDialog(rootPane, "Excluído com sucesso!");
             setModel();
         } else {
             JOptionPane.showMessageDialog(rootPane, "Selecione uma Turma");

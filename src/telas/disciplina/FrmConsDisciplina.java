@@ -251,6 +251,7 @@ public class FrmConsDisciplina extends javax.swing.JFrame implements IDisciplina
         int linha = tabelaDisciplina.getSelectedRow();
         if (linha >= 0) {
             disciplinaController.excluir(listaDisciplina.get(linha).getId());
+             JOptionPane.showMessageDialog(rootPane, "Excluído com sucesso!");
             setModel();
         } else {
             JOptionPane.showMessageDialog(rootPane, "Selecione uma Disciplina");
