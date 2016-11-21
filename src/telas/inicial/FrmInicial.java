@@ -97,7 +97,7 @@ public class FrmInicial extends javax.swing.JFrame {
 
         btnCurso.setBackground(new java.awt.Color(255, 255, 255));
         btnCurso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botaocurso.png"))); // NOI18N
-        btnCurso.setToolTipText("Consulta de Cursos");
+        btnCurso.setToolTipText("Cursos");
         btnCurso.setBorder(null);
         btnCurso.setBorderPainted(false);
         btnCurso.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -111,7 +111,7 @@ public class FrmInicial extends javax.swing.JFrame {
 
         btnAluno.setBackground(new java.awt.Color(255, 255, 255));
         btnAluno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botaoaluno.png"))); // NOI18N
-        btnAluno.setToolTipText("Consulta de Alunos");
+        btnAluno.setToolTipText("Alunos");
         btnAluno.setBorder(null);
         btnAluno.setBorderPainted(false);
         btnAluno.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -139,7 +139,7 @@ public class FrmInicial extends javax.swing.JFrame {
 
         btnTurma1.setBackground(new java.awt.Color(255, 255, 255));
         btnTurma1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botaoturma.png"))); // NOI18N
-        btnTurma1.setToolTipText("Consulta de Turmas");
+        btnTurma1.setToolTipText("Turmas");
         btnTurma1.setBorder(null);
         btnTurma1.setBorderPainted(false);
         btnTurma1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -153,7 +153,7 @@ public class FrmInicial extends javax.swing.JFrame {
 
         btnDisciplina1.setBackground(new java.awt.Color(255, 255, 255));
         btnDisciplina1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/botaodisciplina.png"))); // NOI18N
-        btnDisciplina1.setToolTipText("Consulta de Disciplina");
+        btnDisciplina1.setToolTipText("Disciplina");
         btnDisciplina1.setBorder(null);
         btnDisciplina1.setBorderPainted(false);
         btnDisciplina1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);

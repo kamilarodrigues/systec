@@ -247,7 +247,7 @@ public class FrmCadAluno extends JFrame {
         if (cbxCurso.getSelectedItem() == null || cbxCurso.getSelectedItem().toString().equalsIgnoreCase("Selecione")) {
             dados = dados + " Curso não informada.";
         }
-        if (cbxTurma.getSelectedItem() == null) {
+        if (cbxTurma.getSelectedItem() == null || cbxTurma.getSelectedItem().toString().equalsIgnoreCase("Selecione")) {
             dados = dados + " Turma não informada.";
         }
         return dados;
