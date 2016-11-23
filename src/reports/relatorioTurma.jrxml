@@ -68,13 +68,9 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="73" splitType="Stretch">
-			<image>
-				<reportElement x="0" y="0" width="187" height="27" uuid="7650172a-050b-43a8-909c-37fd796ac376"/>
-				<imageExpression><![CDATA["C:\\Users\\Kamila\\Documents\\PI\\imagens\\senai.png"]]></imageExpression>
-			</image>
+		<band height="48" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement style="Detail" x="1" y="27" width="554" height="28" uuid="5a133dd2-8dca-447f-bdbe-cc8fd32bf739"/>
+				<reportElement style="Detail" x="2" y="20" width="554" height="28" uuid="5a133dd2-8dca-447f-bdbe-cc8fd32bf739"/>
 				<textElement textAlignment="Center">
 					<font size="18" isBold="true"/>
 				</textElement>
